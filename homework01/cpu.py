@@ -2,6 +2,10 @@
 
 @author Victor Norman
 @date 12/26/17
+
+Modified to implement batch-mode for CS-232, Calvin University
+@author Nathan Meyer (tnm6)
+@date 2/10/2020
 '''
 
 import time
@@ -25,6 +29,10 @@ class CPU(threading.Thread):
         self._ram = ram
         self._os = os
         self._debug = debug
+        # Switch for batch mode
+        self._batch = False;
+        # Address of list of programs for batch mode
+        self._prog_list = -1;
 
         # TODO: need to protect these next two variables as they are shared
         # between the CPU thread and the device threads.
@@ -49,6 +57,10 @@ class CPU(threading.Thread):
         '''
         assert isinstance(intr_val, bool)
         self._intr_raised = intr_val
+
+    # Added setter for program list address in batch-mode
+    def set_program_list(self, program_list):
+        self._prog_list = program_list
 
     def add_interrupt_addr(self, addr):
         '''Add the device bus address to the set of devices that have

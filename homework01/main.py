@@ -3,6 +3,10 @@ alter RAM, start the CPU, etc.
 
 @author Victor Norman
 @date 12/26/17
+
+Modified to implement batch-mode for CS-232, Calvin University
+@author Nathan Meyer (tnm6)
+@date 2/10/2020
 '''
 
 
@@ -90,6 +94,7 @@ class Monitor:
                     print("X <addr>: execute program starting at addr")
                     print("L <addr> <tapename>: load a program from tape to bytes starting at addr")
                     print("W <start> <end> <tapename>: write bytes from start to end to tape")
+                    print("R <addr>: run all programs whose starting locations are in memory at addr");
                     print("! : Toggle debugging on or off -- off at startup.")
                     continue
 
@@ -133,6 +138,9 @@ class Monitor:
                         print("Illegal format: ", instr.split()[2], instr.split()[3])
                         continue
                     self._write_program(arg1, endaddr, tapename)
+                # Added function call to use batch mode
+                elif instr.upper().startswith('R '):
+                    self._run_batch(arg1)
                 else:
                     print("Unknown command")
             except Exception as e:
@@ -178,6 +186,12 @@ class Monitor:
     def _run_program(self, addr):
         # creates a new thread, passing in ram, the os, and the
         # starting address
+        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
+        self._cpu.start()		# call run()
+        self._cpu.join()		# wait for it to end
+
+    def _run_batch(self, addr):
+        # TODO: put CPU in batch mode and run
         self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
