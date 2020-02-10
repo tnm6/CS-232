@@ -1,0 +1,17 @@
+# Answers for Homework 1
+## CS 232, Professor Victor Norman, Calvin University
+## Nathan Meyer (tnm6)
+
+1. 1024 words of RAM. The number of bytes per RAM isn't defined, but if it is
+  the usual 2 bytes per word, then 2048 bytes of RAM.
+2. Three "normal" registers (reg0–2) and one program counter (pc).
+3. JLZ takes two parameters: the register number <reg> and the destination
+  <dest>. If the <reg> is less than zero, then jump program counter to <dest>.
+4. In _run_program(), after any optional debug statements. So when calling
+  start() for the CPU, run() calls _run_program(), which immediately after
+  checking debug options, will check for an interrupt.
+5. S shows memory from a given start point to a given end point.
+6. ! toggles debugging on or off during startup.
+7. Assembly language files can contain both comments and blank lines.
+8. _write_program() in main.py writes bytes into memory.
+9. Yes, they assume they are loaded into certain locations in memory.
