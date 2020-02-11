@@ -2,6 +2,10 @@
 
 @author Victor Norman
 @date 12/26/17
+
+Updated to include batch-mode operations
+@author Nathan Meyer (tnm6)
+@date 2/10/2020
 '''
 
 import time
@@ -11,7 +15,8 @@ import threading   # for CPU
 DELAY_BETWEEN_INSTRUCTIONS = 0.2
 
 class CPU(threading.Thread):
-    def __init__(self, ram, os, startAddr, debug, num=0):
+    def __init__(self, ram, os, startAddr, debug, num=0, batch=False):
+        '''Modified to account for batch-mode'''
         threading.Thread.__init__(self)
 
         self._num = num   # unique ID of this cpu
@@ -30,6 +35,10 @@ class CPU(threading.Thread):
         # between the CPU thread and the device threads.
         self._intr_raised = False
         self._intr_addrs = set()
+
+        # Batch-mode variables (switch and location of program list)
+        self._batch = batch
+        self._programs_addr = startAddr
         
         self._intr_vector = [self._kbrd_isr,
                              self._screen_isr]
@@ -49,6 +58,10 @@ class CPU(threading.Thread):
         '''
         assert isinstance(intr_val, bool)
         self._intr_raised = intr_val
+
+    def set_programs_addr(programs):
+        '''New setter for address of program list in batch-mode'''
+        self._programs_addr = programs
 
     def add_interrupt_addr(self, addr):
         '''Add the device bus address to the set of devices that have

@@ -3,6 +3,10 @@ alter RAM, start the CPU, etc.
 
 @author Victor Norman
 @date 12/26/17
+
+Updated to include batch-mode operations
+@author Nathan Meyer (tnm6)
+@date 2/10/2020
 '''
 
 
@@ -190,7 +194,8 @@ class Monitor:
 
     def _run_batch(self, addr):
         '''Added function to run a series of programs (batch-mode)'''
-        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
+        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug, True)
+        self._cpu.set_programs_addr(addr)
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
 
