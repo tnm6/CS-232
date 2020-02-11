@@ -15,7 +15,7 @@ import threading   # for CPU
 DELAY_BETWEEN_INSTRUCTIONS = 0.2
 
 class CPU(threading.Thread):
-    def __init__(self, ram, os, startAddr, debug, num=0, batch=False):
+    def __init__(self, ram, os, startAddr, debug, num=0):
         '''Modified to account for batch-mode'''
         threading.Thread.__init__(self)
 
@@ -37,8 +37,8 @@ class CPU(threading.Thread):
         self._intr_addrs = set()
 
         # Batch-mode variables (switch and location of program list)
-        self._batch = batch
-        self._programs_addr = startAddr
+        self._batch = False
+        self._programs_addr = -1
         
         self._intr_vector = [self._kbrd_isr,
                              self._screen_isr]
@@ -59,9 +59,9 @@ class CPU(threading.Thread):
         assert isinstance(intr_val, bool)
         self._intr_raised = intr_val
 
-    def set_programs_addr(programs):
-        '''New setter for address of program list in batch-mode'''
-        self._programs_addr = programs
+    def set_batch_mode(self):
+        self._batch = True
+        self._programs_addr = self._registers['pc']
 
     def add_interrupt_addr(self, addr):
         '''Add the device bus address to the set of devices that have
@@ -79,8 +79,7 @@ class CPU(threading.Thread):
         self._registers = {
             'reg0': 0,
             'reg1': 0,
-            'reg2': 0,
-            'pc': startAddr
+            'reg2': 0
         }
 
     def isregister(self, s):
@@ -93,10 +92,11 @@ class CPU(threading.Thread):
         return res
 
     def run(self):
-        '''Overrides run() in thread.  Called by calling start().'''
+        '''Overrides run() in thread.  Called by calling start().
+        Modified to account for batch-mode, if enabled.'''
         if self._batch:
             while self._ram[self._programs_addr] != 0:
-                self._registers['pc'] = self._ram[self._programs_addr]
+                self.set_pc(self._ram[self._programs_addr])
                 self._run_program()
                 self.clear_registers()
                 self._programs_addr += 1

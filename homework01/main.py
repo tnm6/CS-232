@@ -193,9 +193,10 @@ class Monitor:
         self._cpu.join()		# wait for it to end
 
     def _run_batch(self, addr):
-        '''Added function to run a series of programs (batch-mode)'''
-        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug, True)
-        self._cpu.set_programs_addr(addr)
+        '''Added function to run a series of programs (batch-mode)
+        Identical to _run_program() except for set_batch_mode()'''
+        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
+        self._cpu.set_batch_mode()
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
 
