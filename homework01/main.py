@@ -191,10 +191,10 @@ class Monitor:
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
 
-    def _run_batch(self, addr, programs):
+    def _run_batch(self, addr):
         '''Added function to run programs in batch mode from list at addr'''
         self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug, True)
-        self._cpu.set_program_list
+        self._cpu.set_program_list(addr)
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
 
