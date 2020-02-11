@@ -74,6 +74,15 @@ class CPU(threading.Thread):
     def restore_registers(self):
         self._registers = self._backup_registers
 
+    def clear_registers(self):
+        '''Added method to clear registers during batch-mode'''
+        self._registers = {
+            'reg0': 0,
+            'reg1': 0,
+            'reg2': 0,
+            'pc': startAddr
+        }
+
     def isregister(self, s):
         return s in ('reg0', 'reg1', 'reg2', 'pc')
 
@@ -85,7 +94,14 @@ class CPU(threading.Thread):
 
     def run(self):
         '''Overrides run() in thread.  Called by calling start().'''
-        self._run_program()
+        if self._batch:
+            while self._ram[self._programs_addr] != 0:
+                self._registers['pc'] = self._ram[self._programs_addr]
+                self._run_program()
+                self.clear_registers()
+                self._programs_addr += 1
+        else:
+            self._run_program()
         
 
     def _run_program(self):
