@@ -72,6 +72,7 @@ class Monitor:
         self._ram = ram
 
     def run(self):   # called from monitor._cpu.start()
+        '''Modified to include option to run programs in batch mode'''
         print("Monitor: enter ? to see options.")
         while True:
             try:
@@ -90,6 +91,8 @@ class Monitor:
                     print("X <addr>: execute program starting at addr")
                     print("L <addr> <tapename>: load a program from tape to bytes starting at addr")
                     print("W <start> <end> <tapename>: write bytes from start to end to tape")
+                    # Added command 'R' to run programs in batch-mode
+                    print("R <addr>: load a list at addr of programs to execute (batch-mode)")
                     print("! : Toggle debugging on or off -- off at startup.")
                     continue
 
@@ -133,6 +136,9 @@ class Monitor:
                         print("Illegal format: ", instr.split()[2], instr.split()[3])
                         continue
                     self._write_program(arg1, endaddr, tapename)
+                # Added option to run programs in batch-mode
+                elif instr.upper().startswith('R '):
+                    self._run_batch(arg1)
                 else:
                     print("Unknown command")
             except Exception as e:
@@ -178,6 +184,12 @@ class Monitor:
     def _run_program(self, addr):
         # creates a new thread, passing in ram, the os, and the
         # starting address
+        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
+        self._cpu.start()		# call run()
+        self._cpu.join()		# wait for it to end
+
+    def _run_batch(self, addr):
+        '''Added function to run a series of programs (batch-mode)'''
         self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
