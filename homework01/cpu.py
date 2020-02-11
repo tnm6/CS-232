@@ -16,7 +16,7 @@ DELAY_BETWEEN_INSTRUCTIONS = 0.2
 
 class CPU(threading.Thread):
     def __init__(self, ram, os, startAddr, debug, num=0):
-        '''Modified to account for batch-mode'''
+        '''Modified to include batch-mode variables (bool and addr)'''
         threading.Thread.__init__(self)
 
         self._num = num   # unique ID of this cpu
@@ -60,7 +60,10 @@ class CPU(threading.Thread):
         self._intr_raised = intr_val
 
     def set_batch_mode(self):
+        '''Activation of batch-mode, sets switch to true and saves starting
+        address as the location of listed programs'''
         self._batch = True
+        # Copy start address from pc into address for program list
         self._programs_addr = self._registers['pc']
 
     def add_interrupt_addr(self, addr):
@@ -96,8 +99,11 @@ class CPU(threading.Thread):
         Modified to account for batch-mode, if enabled.'''
         if self._batch:
             while self._ram[self._programs_addr] != 0:
+                # Update program counter to next listed program's address
                 self.set_pc(self._ram[self._programs_addr])
+
                 self._run_program()
+
                 self.clear_registers()
                 self._programs_addr += 1
         else:
