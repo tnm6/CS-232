@@ -82,7 +82,8 @@ class CPU(threading.Thread):
         self._registers = {
             'reg0': 0,
             'reg1': 0,
-            'reg2': 0
+            'reg2': 0,
+            'pc': 0
         }
 
     def isregister(self, s):
