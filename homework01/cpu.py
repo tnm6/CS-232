@@ -15,7 +15,8 @@ import threading   # for CPU
 DELAY_BETWEEN_INSTRUCTIONS = 0.2
 
 class CPU(threading.Thread):
-    def __init__(self, ram, os, startAddr, debug, num=0):
+    '''Modified to include batch-mode switch and program list address'''
+    def __init__(self, ram, os, startAddr, debug, num=0, batch=False):
         threading.Thread.__init__(self)
 
         self._num = num   # unique ID of this cpu
@@ -30,9 +31,9 @@ class CPU(threading.Thread):
         self._os = os
         self._debug = debug
         # Switch for batch mode
-        self._batch = False;
+        self._batch = batch
         # Address of list of programs for batch mode
-        self._prog_list = -1;
+        self._prog_list = -1
 
         # TODO: need to protect these next two variables as they are shared
         # between the CPU thread and the device threads.
@@ -58,8 +59,8 @@ class CPU(threading.Thread):
         assert isinstance(intr_val, bool)
         self._intr_raised = intr_val
 
-    # Added setter for program list address in batch-mode
     def set_program_list(self, program_list):
+        '''Added setter for program list address in batch-mode'''
         self._prog_list = program_list
 
     def add_interrupt_addr(self, addr):
@@ -73,6 +74,15 @@ class CPU(threading.Thread):
     def restore_registers(self):
         self._registers = self._backup_registers
 
+    def clear_registers(self):
+        '''Added function clear registers (for batch-mode)'''
+        self._registers = {
+            'reg0': 0,
+            'reg1': 0,
+            'reg2': 0,
+            'pc': startAddr
+        }
+
     def isregister(self, s):
         return s in ('reg0', 'reg1', 'reg2', 'pc')
 
@@ -83,8 +93,16 @@ class CPU(threading.Thread):
         return res
 
     def run(self):
-        '''Overrides run() in thread.  Called by calling start().'''
-        self._run_program()
+        '''Overrides run() in thread.  Called by calling start().
+        Modified to account for batch-mode.'''
+        if self._batch:
+            while self._ram[self._prog_list] > 0:     # loop through running saved programs until reach 0
+                self._registers['pc'] = self._ram[self._prog_list]
+                self._run_program()
+                self.clear_registers()
+                self._prog_list += 1
+        else:
+            self._run_program()
         
 
     def _run_program(self):

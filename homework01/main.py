@@ -76,6 +76,7 @@ class Monitor:
         self._ram = ram
 
     def run(self):   # called from monitor._cpu.start()
+        '''Modified to include batch-mode command'''
         print("Monitor: enter ? to see options.")
         while True:
             try:
@@ -190,9 +191,10 @@ class Monitor:
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
 
-    def _run_batch(self, addr):
-        # TODO: put CPU in batch mode and run
-        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
+    def _run_batch(self, addr, programs):
+        '''Added function to run programs in batch mode from list at addr'''
+        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug, True)
+        self._cpu.set_program_list
         self._cpu.start()		# call run()
         self._cpu.join()		# wait for it to end
 
