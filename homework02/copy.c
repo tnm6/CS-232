@@ -9,40 +9,24 @@ int main(int argc, char** argv) {
     exit(-1);
   }
 
-  struct stat stat_buf;
-
   char* src = argv[1];
   char* dest = argv[2];
 
-  // Usage of stat struct based on: https://stackoverflow.com/q/230062
-  if ( stat(src, &stat_buf) == 0 ) {  // file exists
+  struct stat stat_buf;
 
+  // Usage of stat struct based on:
+  // https://stackoverflow.com/a/230070 && https://stackoverflow.com/a/3828537
+  if ( stat(src, &stat_buf) == 0 ) {    // file exists
+    if ( S_ISREG(stat_buf.st_mode) ) {    // file is regular
+      exit(0);
+    } else {
+      perror("\nERROR: <src> not regular file. Exiting.\n\n");
+      exit(-1);
+    }
   } else {
     perror("\nERROR: File not found. Exiting.\n\n");
     exit(-1);
   }
-
-
-  // // Checks if file exists using access() based on this solution:
-  // // https://stackoverflow.com/q/230062
-  // if ( access(src, F_OK) == 0 ) {       // file exists
-  //   if ( access(src, R_OK) == 0 ) {     // file is readable
-  //     FILE * read = fopen(src, "r");    // open the file
-
-  //     if ( access(dest, F_OK) == -1 ) { // file does not already exist
-
-  //     } else {
-  //       perror("\nERROR: Destination file already exists. Exiting.\n\n");
-  //       exit(-1);
-  //     }
-  //   } else {
-  //     perror("\nERROR: Insufficient read permissions. Exiting.\n\n");
-  //     exit(-1);
-  //   }
-  // } else {
-  //   perror("\nERROR: File not found. Exiting.\n\n");
-  //   exit(-1);
-  // }
 
   exit(0);
 }
