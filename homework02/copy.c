@@ -14,7 +14,7 @@
 int main(int argc, char** argv) {
   // First check for correct number of args
   if (argc != 3) {
-    fprintf(stderr, "\nERROR: Incorrect arguments. "
+    fprintf(stderr, "ERROR: Incorrect arguments. "
             "Usage: ./copy <src> <dest>\n");
     exit(-1);
   }
@@ -46,16 +46,16 @@ int main(int argc, char** argv) {
           ch = fgetc(read);
         }
       } else {
-        fprintf(stderr, "\nERROR: <dest> file already exists");
+        fprintf(stderr, "ERROR: <dest> file already exists\n");
         exit(-1);
       }
     } else {
-      fprintf(stderr, "\nERROR: <src> not a regular file "
-              "(directory, symlink, etc.)");
+      fprintf(stderr, "ERROR: <src> not a regular file "
+              "(directory, symlink, etc.)\n");
       exit(-1);
     }
   } else {
-    fprintf(stderr, "\nERROR: <src> file not found");
+    fprintf(stderr, "\nERROR: <src> file not found\n");
     exit(-1);
   }
 
