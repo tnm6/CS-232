@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
       exit(-1);
     }
   } else {
-    fprintf(stderr, "\nERROR: <src> file not found\n");
+    fprintf(stderr, "ERROR: <src> file not found\n");
     exit(-1);
   }
 
