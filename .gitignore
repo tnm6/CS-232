@@ -9,3 +9,6 @@
 
 # Ignore python caches
 __pycache__/
+
+# Unignore homework03
+!mystery
