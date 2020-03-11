@@ -5,66 +5,61 @@ using namespace std;
 
 void PathTester::run() const
 {
+  Path test;
+
   cout << "Testing Path class" << endl;
-  testConstructor();
-  testFind();
-  testGetDir();
+  testConstructor(test);
+  testFind(test);
+  testGetDir(test);
   cout << "Path tests passed" << endl;
 }
 
-void PathTester::testConstructor() const
+void PathTester::testConstructor(const Path &test) const
 {
-  Path test;
-
-  cout << "Testing constructor" << endl;
+  cout << "\tTesting constructor" << endl;
 
   // Tests specific to Nathan's MacBook
   // TODO: add tests for uLab machines
   assert(!test.directories.empty());
   assert(test.directories.size() == 6);
-  assert(test.directories[0].compare("/usr/local/bin"));
-  assert(test.directories[1].compare("/usr/local/sbin"));
-  assert(test.directories[2].compare("/usr/bin"));
-  assert(test.directories[3].compare("/bin"));
-  assert(test.directories[4].compare("/usr/sbin"));
-  assert(test.directories[5].compare("/sbin"));
+  assert(test.directories[0].compare("/usr/local/bin") == 0);
+  assert(test.directories[1].compare("/usr/local/sbin") == 0);
+  assert(test.directories[2].compare("/usr/bin") == 0);
+  assert(test.directories[3].compare("/bin") == 0);
+  assert(test.directories[4].compare("/usr/sbin") == 0);
+  assert(test.directories[5].compare("/sbin") == 0);
 
-  cout << "Constructor tests passed" << endl;
+  cout << "\tConstructor tests passed" << endl;
 }
 
-void PathTester::testFind() const
+void PathTester::testFind(const Path &test) const
 {
-  Path test;
-
-  cout << "Testing find()" << endl;
+  cout << "\tTesting find()" << endl;
 
   // Tests specific to Nathan's MacBook
   // TODO: add tests for uLab machines
   assert(test.find("zsh") == 0);
-  assert(test.find("md5") == 1);
   assert(test.find("snmpdelta") == 2);
   assert(test.find("kill") == 3);
   assert(test.find("klist_cdhashes") == 4);
   assert(test.find("mount_cd9660") == 5);
   assert(test.find("blahblahblah") == -1);
 
-  cout << "find() tests passed" << endl;
+  cout << "\tfind() tests passed" << endl;
 }
 
-void PathTester::testGetDir() const
-{
-  Path test;
-
-  cout << "Testing getDirectory()" << endl;
+void PathTester::testGetDir(const Path &test) const
+{ 
+  cout << "\tTesting getDirectory()" << endl;
 
   // Tests specific to Nathan's MacBook
   // TODO: add tests for uLab machines
-  assert(test.getDirectory(0).compare("/usr/local/bin"));
-  assert(test.getDirectory(1).compare("/usr/local/sbin"));
-  assert(test.getDirectory(2).compare("/usr/bin"));
-  assert(test.getDirectory(3).compare("/bin"));
-  assert(test.getDirectory(4).compare("/usr/sbin"));
-  assert(test.getDirectory(5).compare("/sbin"));
+  assert(test.getDirectory(0).compare("/usr/local/bin") == 0);
+  assert(test.getDirectory(1).compare("/usr/local/sbin") == 0);
+  assert(test.getDirectory(2).compare("/usr/bin") == 0);
+  assert(test.getDirectory(3).compare("/bin") == 0);
+  assert(test.getDirectory(4).compare("/usr/sbin") == 0);
+  assert(test.getDirectory(5).compare("/sbin") == 0);
 
   try
   {
@@ -74,5 +69,5 @@ void PathTester::testGetDir() const
   catch (exception e)
   { }
 
-  cout << "getDirectory() tests passed" << endl;
+  cout << "\tgetDirectory() tests passed" << endl;
 }

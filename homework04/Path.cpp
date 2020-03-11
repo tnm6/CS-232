@@ -8,22 +8,22 @@ Path::Path()
 
 int Path::find(const string &program) const
 {
-  DIR *currentDirectory;
+  DIR *dir;
   struct dirent *dirEntry;
   int i, numDirs;
 
   numDirs = directories.size();
   for (i = 0; i < numDirs; i++)
   {
-    currentDirectory = opendir(directories[i].c_str());
+    dir = opendir(directories[i].c_str());
 
-    while ((dirEntry = readdir(currentDirectory)) != NULL)
+    while ((dirEntry = readdir(dir)) != NULL)
     {
-      if (strcmp(dirEntry->d_name, program.c_str()) == 0)
+      if (program.compare(dirEntry->d_name) == 0)
         return i;
     }
 
-    closedir(currentDirectory);
+    closedir(dir);
   }
 
   return -1;
@@ -34,7 +34,7 @@ string Path::getDirectory(int i) const
   if (i < directories.size())
     return directories[i];
   else
-    throw "Index out or range of directories";
+    throw "Index out of range of directories";
 }
 
 void Path::readPath()
