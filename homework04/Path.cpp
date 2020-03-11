@@ -1,5 +1,6 @@
 #include "Path.h"
 #include <dirent.h>
+#include <stdexcept>
 
 Path::Path()
 {
@@ -32,9 +33,14 @@ int Path::find(const string &program) const
 string Path::getDirectory(int i) const
 {
   if (i < directories.size())
+  {
     return directories[i];
+  }
   else
-    throw "Index out of range of directories";
+  {
+    throw out_of_range("Index out of range of directories");
+  }
+
 }
 
 void Path::readPath()

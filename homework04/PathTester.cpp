@@ -1,6 +1,7 @@
 #include "PathTester.h"
 #include <cassert>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 void PathTester::run() const
@@ -18,9 +19,10 @@ void PathTester::testConstructor(const Path &test) const
 {
   cout << "\tTesting constructor" << endl;
 
+  assert(!test.directories.empty());
+
   // Tests specific to Nathan's MacBook
   // TODO: add tests for uLab machines
-  assert(!test.directories.empty());
   assert(test.directories.size() == 6);
   assert(test.directories[0].compare("/usr/local/bin") == 0);
   assert(test.directories[1].compare("/usr/local/sbin") == 0);
@@ -61,13 +63,12 @@ void PathTester::testGetDir(const Path &test) const
   assert(test.getDirectory(4).compare("/usr/sbin") == 0);
   assert(test.getDirectory(5).compare("/sbin") == 0);
 
-  try
-  {
+  try {
     test.getDirectory(6);
-    cout << "getDirectory() returned out of bounds index.";
+    cout << "getDirectory() allowed out of bounds index" << endl;
+    exit(-1);
   }
-  catch (exception e)
-  { }
+  catch (out_of_range e) { }  // continue
 
   cout << "\tgetDirectory() tests passed" << endl;
 }
