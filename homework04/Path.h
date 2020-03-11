@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <dirent.h>
 using namespace std;
 
 class Path
@@ -15,6 +14,7 @@ public:
 
 private:
   vector<string> directories;
+  void readPath();
 };
 
 #endif

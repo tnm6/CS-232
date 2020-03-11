@@ -1,28 +1,19 @@
 #include "Path.h"
+#include <dirent.h>
 
 Path::Path()
 {
-  char *fullPath;
-  char *curPath;
-
-  fullPath = getenv("PATH");
-
-  curPath = strtok(fullPath, ":");
-  while (curPath != NULL)
-  {
-    directories.push_back(curPath);
-    curPath = strtok(NULL, ":");
-  }
+  readPath();
 }
 
 int Path::find(const string &program) const
 {
   DIR *currentDirectory;
   struct dirent *dirEntry;
-  int i, length;
+  int i, numDirs;
 
-  length = directories.size();
-  for (i = 0; i < length; i++)
+  numDirs = directories.size();
+  for (i = 0; i < numDirs; i++)
   {
     currentDirectory = opendir(directories[i].c_str());
 
@@ -41,4 +32,19 @@ int Path::find(const string &program) const
 string Path::getDirectory(int i) const
 {
   return directories[i];
+}
+
+void Path::readPath()
+{
+  char *fullPath;
+  char *curPath;
+
+  fullPath = getenv("PATH");
+
+  curPath = strtok(fullPath, ":");
+  while (curPath != NULL)
+  {
+    directories.push_back(curPath);
+    curPath = strtok(NULL, ":");
+  }
 }
