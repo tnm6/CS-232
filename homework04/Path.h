@@ -3,17 +3,18 @@
 
 #include <string>
 #include <vector>
+#include <dirent.h>
 using namespace std;
 
 class Path
 {
 public:
   Path();
-  int find(const string& program) const;
+  int find(const string &program) const;
   string getDirectory(int i) const;
 
 private:
-  vector<string> path;
+  vector<string> directories;
 };
 
 #endif

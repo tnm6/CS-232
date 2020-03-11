@@ -1,18 +1,11 @@
-#include <stdlib.h>
+#include "Path.h"
 #include <iostream>
 using namespace std;
 
 int main()
 {
-  char *fullPath;
-  char *curPath;
+  Path myPath;
 
-  fullPath = getenv("PATH");
-
-  curPath = strtok(fullPath, ":");
-  while (curPath != NULL)
-  {
-    cout << curPath << endl;
-    curPath = strtok(NULL, ":");
-  }
+  cout << myPath.find("zsh") << endl;
+  cout << myPath.find("md5") << endl;
 }
