@@ -17,9 +17,10 @@ void PathTester::testConstructor() const
   Path test;
 
   cout << "Testing constructor" << endl;
-  // Tests specific to my MacBook
+
+  // Tests specific to Nathan's MacBook
   // TODO: add tests for uLab machines
-  assert( !test.directories.empty() );
+  assert(!test.directories.empty());
   assert(test.directories.size() == 6);
   assert(test.directories[0].compare("/usr/local/bin"));
   assert(test.directories[1].compare("/usr/local/sbin"));
@@ -39,13 +40,39 @@ void PathTester::testFind() const
 
   // Tests specific to Nathan's MacBook
   // TODO: add tests for uLab machines
-  assert( test.find("zsh") == 0 );
-  assert( test.find("md5") == 1 );
-  assert( test.find("snmpdelta") == 2);
-  assert( test.find("kill") == 3 );
-  assert( test.find("klist_cdhashes") == 4);
-  assert( test.find("mount_cd9660") == 5);
-  assert( test.find("blahblahblah") == -1);
+  assert(test.find("zsh") == 0);
+  assert(test.find("md5") == 1);
+  assert(test.find("snmpdelta") == 2);
+  assert(test.find("kill") == 3);
+  assert(test.find("klist_cdhashes") == 4);
+  assert(test.find("mount_cd9660") == 5);
+  assert(test.find("blahblahblah") == -1);
 
   cout << "find() tests passed" << endl;
+}
+
+void PathTester::testGetDir() const
+{
+  Path test;
+
+  cout << "Testing getDirectory()" << endl;
+
+  // Tests specific to Nathan's MacBook
+  // TODO: add tests for uLab machines
+  assert(test.getDirectory(0).compare("/usr/local/bin"));
+  assert(test.getDirectory(1).compare("/usr/local/sbin"));
+  assert(test.getDirectory(2).compare("/usr/bin"));
+  assert(test.getDirectory(3).compare("/bin"));
+  assert(test.getDirectory(4).compare("/usr/sbin"));
+  assert(test.getDirectory(5).compare("/sbin"));
+
+  try
+  {
+    test.getDirectory(6);
+    cout << "getDirectory() returned out of bounds index.";
+  }
+  catch (exception e)
+  { }
+
+  cout << "getDirectory() tests passed" << endl;
 }

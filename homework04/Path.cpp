@@ -31,7 +31,10 @@ int Path::find(const string &program) const
 
 string Path::getDirectory(int i) const
 {
-  return directories[i];
+  if (i < directories.size())
+    return directories[i];
+  else
+    throw "Index out or range of directories";
 }
 
 void Path::readPath()
