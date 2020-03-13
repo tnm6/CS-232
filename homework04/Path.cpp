@@ -4,7 +4,17 @@
 
 Path::Path()
 {
-  readPath();
+  char *fullPath;
+  char *curPath;
+
+  fullPath = getenv("PATH");
+
+  curPath = strtok(fullPath, ":");
+  while (curPath != NULL)
+  {
+    directories.push_back(curPath);
+    curPath = strtok(NULL, ":");
+  }
 }
 
 int Path::find(const string &program) const
@@ -39,21 +49,5 @@ string Path::getDirectory(int i) const
   else
   {
     throw out_of_range("Index out of range of directories");
-  }
-
-}
-
-void Path::readPath()
-{
-  char *fullPath;
-  char *curPath;
-
-  fullPath = getenv("PATH");
-
-  curPath = strtok(fullPath, ":");
-  while (curPath != NULL)
-  {
-    directories.push_back(curPath);
-    curPath = strtok(NULL, ":");
   }
 }

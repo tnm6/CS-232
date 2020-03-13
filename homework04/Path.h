@@ -14,7 +14,6 @@ public:
 
 private:
   vector<string> directories;
-  void readPath();
   friend class PathTester;
 };
 
