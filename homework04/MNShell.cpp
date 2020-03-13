@@ -1,15 +1,13 @@
 #include 'MNShell.h'
 
-MNShell::MNShell(){
-
+MNShell::MNShell()
+{
 }
 
-
-void MNShell::run(){
-
+void MNShell::run()
+{
 }
 
-
-MNShell::~MNShell(){
-
+MNShell::~MNShell()
+{
 }

@@ -1,12 +1,12 @@
-#ifndef MNShell_H_
-#define MNShell_H_
+#ifndef MNSHELL_H_
+#define MNSHELL_H_
 
-
-class MNShell{
-    public:
-        MNShell();
-        void run();
-        virtual ~MNShell();
+class MNShell
+{
+public:
+  MNShell();
+  void run();
+  virtual ~MNShell();
 };
 
 #endif
