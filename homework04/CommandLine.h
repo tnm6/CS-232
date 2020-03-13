@@ -12,9 +12,6 @@ using namespace std;
 class CommandLine
 {
 public:
-  char *commandInput;
-  char **argv;
-  int argc;
   CommandLine(istream &in);
   char *getCommand() const;
   int getArgCount() const;
@@ -22,6 +19,11 @@ public:
   char *getArgVector(int i) const;
   bool noAmpersand() const;
   virtual ~CommandLine();
+
+private:
+  char *commandInput;
+  char **argv;
+  int argc;
 };
 
 #endif //CommandLine
