@@ -1,5 +1,6 @@
 #include "PathTester.h"
 #include "PromptTester.h"
+#include "CommandLineTester.h"
 
 int main() {
   PathTester pathTester;
@@ -7,4 +8,7 @@ int main() {
 
   PromptTester promptTester;
   promptTester.run();
+
+  CommandLineTester clTester;
+  clTester.runTests();
 }
