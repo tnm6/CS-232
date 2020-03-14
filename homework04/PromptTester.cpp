@@ -1,6 +1,7 @@
 #include "PromptTester.h"
 #include <cassert>
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 void PromptTester::run() const
