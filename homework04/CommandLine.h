@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+#define CL_SIZE 256
+
 class CommandLine
 {
 public:

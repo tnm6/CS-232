@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <cstring>
+#include <iostream>
 using namespace std;
 
 //http://www.cplusplus.com/reference/istream/istream/get/
@@ -9,25 +10,40 @@ CommandLine::CommandLine(istream &in)
 {
   argc = 0;
 
+  char **argv = new char*[CL_SIZE];
+  char *input = new char[CL_SIZE];
   char *command;
-  vector<char*> commandVec;
 
-  // ***this loop is causing the bus error/segmentation fault***
-  while (in.peek() != '\n')
+  in.getline(input, CL_SIZE);
+
+  command = strtok(input, " ");
+  while (command != '\0')
   {
-    in >> command;
-    commandVec.push_back(command);
+    // argv[argc] = command;
     argc++;
+    cout << "Printing " << command << endl;
+    command = strtok(NULL, " ");
   }
 
-  char **argv = (char**) calloc (argc+1, sizeof(char*));
+  // char *command;
+  // vector<char*> commandVec;
 
-  for (int i = 0; i < argc; i++)
-  {
-    argv[i] = commandVec[i];
-  }
+  // // ***this loop is causing the bus error/segmentation fault***
+  // while (in.peek() != '\n')
+  // {
+  //   in >> command;
+  //   commandVec.push_back(command);
+  //   argc++;
+  // }
 
-  argv[argc] = NULL;
+  // char **argv = (char**) calloc (argc+1, sizeof(char*));
+
+  // for (int i = 0; i < argc; i++)
+  // {
+  //   argv[i] = commandVec[i];
+  // }
+
+  // argv[argc] = NULL;
 }
 
 char* CommandLine::getCommand() const
@@ -52,7 +68,7 @@ char* CommandLine::getArgVector(int i) const
 
 bool CommandLine::noAmpersand() const
 {
-  if (strcmp(argv[argc-1], "&"))
+  if (strcmp(argv[argc-1], "&") == 0)
   {
     return false;
   }
