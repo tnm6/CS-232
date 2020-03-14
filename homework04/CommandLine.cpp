@@ -1,6 +1,7 @@
 #include "CommandLine.h"
 #include <stdlib.h>
 #include <vector>
+#include <cstring>
 using namespace std;
 
 //http://www.cplusplus.com/reference/istream/istream/get/

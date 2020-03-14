@@ -1,6 +1,7 @@
 #include "Path.h"
 #include <dirent.h>
 #include <stdexcept>
+#include <string>
 using namespace std;
 
 Path::Path()
