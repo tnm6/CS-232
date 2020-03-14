@@ -1,6 +1,6 @@
 #include "PathTester.h"
 #include "PromptTester.h"
-#include "CommandLineTester.h"
+// #include "CommandLineTester.h"
 #include <iostream>
 using namespace std;
 
@@ -11,6 +11,6 @@ int main() {
   PromptTester promptTester;
   promptTester.run();
 
-  CommandLineTester clTester;
-  clTester.run(cin);
+  // CommandLineTester clTester;
+  // clTester.run(cin);
 }

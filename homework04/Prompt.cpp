@@ -3,7 +3,7 @@
 
 Prompt::Prompt()
 {
-  workingDir = getcwd(dirBuff, PATH_MAX + 1);
+  workingDir = getcwd(dirBuff, PATH_MAX);
 }
 
 char *Prompt::get() const

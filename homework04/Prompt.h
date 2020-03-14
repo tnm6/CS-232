@@ -10,7 +10,7 @@ public:
   char *get() const;
 
 private:
-  char dirBuff[PATH_MAX + 1];
+  char dirBuff[PATH_MAX];
   char *workingDir;
   friend class PromptTester;
 };

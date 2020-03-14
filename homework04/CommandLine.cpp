@@ -1,41 +1,32 @@
 #include "CommandLine.h"
-#include <limits.h>
 #include <stdlib.h>
 #include <vector>
 using namespace std;
-
-
-//alright
-
-// 
-// cool I just installed it, but I have to restart VS Code real quick
 
 //http://www.cplusplus.com/reference/istream/istream/get/
 CommandLine::CommandLine(istream &in)
 {
   argc = 0;
 
-  char *input;
+
   char *command;
-  vector<char*> commands;
+  vector<char*> commandVec;
 
-  input = (char*) calloc (ARG_MAX, sizeof(char));
-
-  command = strtok(input, " ");
-  while (strcmp(command, "\0") != 0)
+  while (in.peek() != '\n')
   {
+    in >> command;
+    commandVec.push_back(command);
     argc++;
-    commands.push_back(command);
   }
 
-  argv = (char**) calloc (argc, sizeof(char));
+  char **argv = (char**) calloc (argc+1, sizeof(char*));
 
   for (int i = 0; i < argc; i++)
   {
-    argv[i] = commands[i];
+    argv[i] = commandVec[i];
   }
 
-  free(input);
+  argv[argc] = NULL;
 }
 
 char* CommandLine::getCommand() const
@@ -69,5 +60,10 @@ bool CommandLine::noAmpersand() const
 
 CommandLine::~CommandLine()
 {
+  for (int i = 0; i < argc; i++)
+  {
+    free(argv[i]);
+  }
+
   free(argv);
 }

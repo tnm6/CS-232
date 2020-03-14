@@ -3,6 +3,8 @@
 
 #include "Prompt.h"
 #include "Path.h"
+#include <unistd.h>
+#include <string>
 
 class MNShell
 {

@@ -24,5 +24,9 @@ void PromptTester::testConstructor(const Prompt &test) const
 
 void PromptTester::testGet(const Prompt &test) const
 {
+  cout << "\tTesting get()" << endl;
 
+  assert(strcmp(test.get(), "/Users/nathan/CS/232/homework04") == 0);
+
+  cout << "\tget() test passed" << endl;
 }
