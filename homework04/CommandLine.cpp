@@ -17,7 +17,7 @@ CommandLine::CommandLine(istream &in)
   in.getline(input, CL_SIZE);
 
   command = strtok(input, " ");
-  while (command != '\0')
+  while (command != NULL)
   {
     // argv[argc] = command;
     argc++;
