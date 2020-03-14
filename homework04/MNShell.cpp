@@ -1,6 +1,7 @@
 #include "MNShell.h"
 #include "CommandLine.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 MNShell::MNShell()
