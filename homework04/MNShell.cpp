@@ -2,6 +2,8 @@
 #include "CommandLine.h"
 #include <iostream>
 #include <string>
+#include <cstring>
+#include <sys/wait.h>
 using namespace std;
 
 MNShell::MNShell()
