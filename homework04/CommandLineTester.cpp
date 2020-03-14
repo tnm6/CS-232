@@ -1,32 +1,13 @@
 #include "CommandLineTester.h"
+#include <iostream>
+using namespace std;
 
-void CommandLineTester::runTests() const
+void CommandLineTester::run(istream &in) const
 {
-  cout << "Testing Command Line" << endl;
-  testConstructor();
-  testgetCommand();
-  testgetArgCount();
-  testArgVector();
-  testnoAmpersand();
-}
+  CommandLine cl(in);
 
-void CommandLineTester::testConstructor() const
-{
-}
-
-void CommandLineTester::testgetCommand() const
-{
-}
-
-void CommandLineTester::testgetArgCount() const
-{
-  //
-}
-
-void CommandLineTester::testArgVector() const
-{
-}
-
-void CommandLineTester::testnoAmpersand() const
-{
+  for (int i = 0; i < cl.argc; i++)
+  {
+    cout << cl.argv[i] << endl;
+  }
 }
