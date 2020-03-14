@@ -4,6 +4,8 @@
 #include <string>
 #include <cstring>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <stdio.h>
 using namespace std;
 
 MNShell::MNShell()

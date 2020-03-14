@@ -9,10 +9,10 @@ CommandLine::CommandLine(istream &in)
 {
   argc = 0;
 
-
   char *command;
   vector<char*> commandVec;
 
+  // ***this loop is causing the bus error/segmentation fault***
   while (in.peek() != '\n')
   {
     in >> command;
@@ -59,12 +59,12 @@ bool CommandLine::noAmpersand() const
   return true;
 }
 
-CommandLine::~CommandLine()
-{
-  for (int i = 0; i < argc; i++)
-  {
-    free(argv[i]);
-  }
+// CommandLine::~CommandLine()
+// {
+//   for (int i = 0; i < argc; i++)
+//   {
+//     free(argv[i]);
+//   }
 
-  free(argv);
-}
+//   free(argv);
+// }

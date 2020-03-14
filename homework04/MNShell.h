@@ -4,7 +4,7 @@
 #include "Prompt.h"
 #include "Path.h"
 #include <unistd.h>
-#include <string>
+#include <string.h>
 
 class MNShell
 {
