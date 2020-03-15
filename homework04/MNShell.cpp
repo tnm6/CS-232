@@ -32,7 +32,7 @@ void MNShell::run()
       }
       if (strcmp(command, "pwd") == 0)
       {
-        cout << endl << prompt.get() << endl;
+        cout << prompt.get() << endl;
         continue;
       }
       if (strcmp(command, "cd") == 0)
@@ -42,10 +42,10 @@ void MNShell::run()
         {
           cout << "Directory not found..." << endl;
         }
-        // else
-         //{
-          // Prompt;
-        // }
+        else
+        {
+          Prompt;
+        }
         continue;
       }
       if (path.find(command) == -1)

@@ -15,7 +15,7 @@ public:
   char** getArgVector() const;
   char* getArgVector(int i) const;
   bool noAmpersand() const;
-  // virtual ~CommandLine();
+  virtual ~CommandLine();
 
 private:
   char **argv;

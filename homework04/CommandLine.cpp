@@ -2,16 +2,39 @@
 #include <stdlib.h>
 #include <vector>
 #include <cstring>
-#include <iostream>
+// #include <iostream>
 using namespace std;
 
 //http://www.cplusplus.com/reference/istream/istream/get/
 CommandLine::CommandLine(istream &in)
 {
+  // argc = 0;                            // init argc
+  // int const size = 256;                // default size for input char array
+  // char **ArgVector = new char *[size]; // init dummy argv
+  // char *input = new char[size];        // input char array
+  // char *point;
+
+  // in.getline(input, size); // grab input
+
+  // if (input != NULL)
+  // {
+  //   point = strtok(input, " "); // create pointer
+
+  //   while (point != NULL)
+  //   {
+  //     ArgVector[argc] = point; // set argv to proper command
+  //     argc++;                  // increment argc
+  //     //cout << point << endl;
+  //     point = strtok(NULL, " "); // move pointer
+  //   }
+  // }
+  // argv = new char *;
+  // argv = ArgVector;
+
   argc = 0;
 
-  char **argv = new char*[CL_SIZE];
   char *input = new char[CL_SIZE];
+  char **tempVec = new char *[CL_SIZE];
   char *command;
 
   in.getline(input, CL_SIZE);
@@ -19,31 +42,14 @@ CommandLine::CommandLine(istream &in)
   command = strtok(input, " ");
   while (command != NULL)
   {
-    // argv[argc] = command;
+    tempVec[argc] = command;
     argc++;
-    cout << "Printing " << command << endl;
+    // cout << "Printing " << command << endl;
     command = strtok(NULL, " ");
   }
 
-  // char *command;
-  // vector<char*> commandVec;
-
-  // // ***this loop is causing the bus error/segmentation fault***
-  // while (in.peek() != '\n')
-  // {
-  //   in >> command;
-  //   commandVec.push_back(command);
-  //   argc++;
-  // }
-
-  // char **argv = (char**) calloc (argc+1, sizeof(char*));
-
-  // for (int i = 0; i < argc; i++)
-  // {
-  //   argv[i] = commandVec[i];
-  // }
-
-  // argv[argc] = NULL;
+  argv = new char*;
+  argv = tempVec;
 }
 
 char* CommandLine::getCommand() const
@@ -75,12 +81,7 @@ bool CommandLine::noAmpersand() const
   return true;
 }
 
-// CommandLine::~CommandLine()
-// {
-//   for (int i = 0; i < argc; i++)
-//   {
-//     free(argv[i]);
-//   }
-
-//   free(argv);
-// }
+CommandLine::~CommandLine()
+{
+  delete[] argv;
+}
