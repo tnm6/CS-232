@@ -1,0 +1,330 @@
+Script started on 2020-03-14 23:28:36-0400
+]0;tnm6@gold00: ~/232/homework04[01;32mtnm6@gold00[00m:[01;34m~/232/homework04[00m$ ./mnshell
+/home/tnm6/232/homework04$ ls
+CommandLine.cpp  MNShell.cpp  Path.cpp	Prompt.cpp  main.cpp  submission.script
+CommandLine.h	 MNShell.h    Path.h	Prompt.h    mnshell   tester
+/home/tnm6/232/homework04$ cd ..
+/home/tnm6/232$ pwd
+/home/tnm6/232
+/home/tnm6/232$ ls -a
+.  ..  .git  .gitignore  homework01  homework02  homework03  homework04
+/home/tnm6/232$ ls -  l /home/cs/
+total 0
+drwxrwsr-x  2 root cs-rights-facstf  2 Jul 24  2019 101
+drwxrwsr-x  6 root cs-rights-facstf 13 Aug 28  2019 106
+drwxrwsr-x  2 root cs-rights-facstf  9 Jan 30 14:56 108
+drwxrwsr-x+ 7 root cs-rights-facstf 15 Feb 13 16:14 112
+drwxrwsr-x  2 root cs-rights-facstf  3 Jan 23  2019 202
+drwxrwsr-x  2 root cs-rights-facstf  4 Jan 23  2019 212
+drwxrwsr-x  4 root cs-rights-facstf  4 Jan 23  2019 214
+drwxrwsr-x  6 root cs-rights-facstf  9 Mar 14 16:10 232
+drwxrwsr-x  2 root cs-rights-facstf  3 Jan 23  2019 262
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 300
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 312
+drwxrwsr-x  5 root cs-rights-facstf  3 Aug 28  2019 332
+drwxrwsr-x  2 root cs-rights-facstf  2 Jan 23  2019 336
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 337
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 342
+drwxrwsr-x  2 root cs-rights-facstf  1 Jul 24  2019 344
+drwxrwsr-x  2 root cs-rights-facstf  1 Jul 24  2019 352
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 364
+drwxrwsr-x  5 root cs-rights-facstf  9 Nov  1 14:00 374
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 384
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 390
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 394
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 398
+drwxrwxr-x  3 ka37 ka37              3 Dec  4 09:03 data202
+drwxrwsr-x  3 root cs-rights-facstf  1 May 17  2018 seniorprojects
+drwxrwsr-x  3 root cs-rights-facstf  2 Jan 23  2019 w61
+/home/tnm6/232$ cd homework04
+/home/tnm6/232/homework04$ ls -ax      ps -ax &
+/home/tnm6/232/homework04$   PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:07 /sbin/init
+    2 ?        S      0:00 [kthreadd]
+    3 ?        I<     0:00 [rcu_gp]
+    4 ?        I<     0:00 [rcu_par_gp]
+    6 ?        I<     0:00 [kworker/0:0H-kb]
+    9 ?        I<     0:00 [mm_percpu_wq]
+   10 ?        S      0:00 [ksoftirqd/0]
+   11 ?        I      0:10 [rcu_sched]
+   12 ?        S      0:00 [migration/0]
+   13 ?        S      0:00 [idle_inject/0]
+   14 ?        S      0:00 [cpuhp/0]
+   15 ?        S      0:00 [cpuhp/1]
+   16 ?        S      0:00 [idle_inject/1]
+   17 ?        S      0:00 [migration/1]
+   18 ?        S      0:00 [ksoftirqd/1]
+   20 ?        I<     0:00 [kworker/1:0H-kb]
+   21 ?        S      0:00 [cpuhp/2]
+   22 ?        S      0:00 [idle_inject/2]
+   23 ?        S      0:00 [migration/2]
+   24 ?        S      0:00 [ksoftirqd/2]
+   26 ?        I<     0:00 [kworker/2:0H-kb]
+   27 ?        S      0:00 [cpuhp/3]
+   28 ?        S      0:00 [idle_inject/3]
+   29 ?        S      0:00 [migration/3]
+   30 ?        S      0:00 [ksoftirqd/3]
+   32 ?        I<     0:00 [kworker/3:0H-kb]
+   33 ?        P      0:00 [cpuhp/4]
+   34 ?        P      0:00 [idle_inject/4]
+   35 ?        P      0:00 [migration/4]
+   36 ?        P      0:00 [ksoftirqd/4]
+   37 ?        I      0:00 [kworker/4:0]
+   38 ?        I<     0:00 [kworker/4:0H]
+   39 ?        P      0:00 [cpuhp/5]
+   40 ?        P      0:00 [idle_inject/5]
+   41 ?        P      0:00 [migration/5]
+   42 ?        P      0:00 [ksoftirqd/5]
+   43 ?        I      0:00 [kworker/5:0]
+   44 ?        I<     0:00 [kworker/5:0H]
+   45 ?        P      0:00 [cpuhp/6]
+   46 ?        P      0:00 [idle_inject/6]
+   47 ?        P      0:00 [migration/6]
+   48 ?        P      0:00 [ksoftirqd/6]
+   49 ?        I      0:00 [kworker/6:0]
+   50 ?        I<     0:00 [kworker/6:0H]
+   51 ?        P      0:00 [cpuhp/7]
+   52 ?        P      0:00 [idle_inject/7]
+   53 ?        P      0:00 [migration/7]
+   54 ?        P      0:00 [ksoftirqd/7]
+   55 ?        I      0:00 [kworker/7:0]
+   56 ?        I<     0:00 [kworker/7:0H]
+   57 ?        S      0:00 [kdevtmpfs]
+   58 ?        I<     0:00 [netns]
+   59 ?        S      0:00 [rcu_tasks_kthre]
+   60 ?        S      0:00 [kauditd]
+   62 ?        S      0:00 [khungtaskd]
+   63 ?        S      0:00 [oom_reaper]
+   64 ?        I<     0:00 [writeback]
+   65 ?        S      0:00 [kcompactd0]
+   66 ?        SN     0:00 [ksmd]
+   67 ?        SN     0:00 [khugepaged]
+  160 ?        I<     0:00 [kintegrityd]
+  161 ?        I<     0:00 [kblockd]
+  162 ?        I<     0:00 [blkcg_punt_bio]
+  164 ?        I<     0:00 [tpm_dev_wq]
+  165 ?        I<     0:00 [ata_sff]
+  166 ?        I<     0:00 [md]
+  167 ?        I<     0:00 [edac-poller]
+  168 ?        I<     0:00 [devfreq_wq]
+  169 ?        S      0:00 [watchdogd]
+  172 ?        S      0:00 [kswapd0]
+  173 ?        I<     0:00 [kworker/u17:0]
+  174 ?        S      0:00 [ecryptfs-kthrea]
+  177 ?        I<     0:00 [kthrotld]
+  178 ?        I<     0:00 [acpi_thermal_pm]
+  180 ?        I<     0:00 [ipv6_addrconf]
+  191 ?        I<     0:00 [kstrp]
+  210 ?        I<     0:00 [charger_manager]
+  272 ?        S      0:00 [scsi_eh_0]
+  273 ?        I<     0:00 [scsi_tmf_0]
+  274 ?        S      0:00 [scsi_eh_1]
+  275 ?        I<     0:00 [scsi_tmf_1]
+  276 ?        S      0:00 [scsi_eh_2]
+  277 ?        I<     0:00 [scsi_tmf_2]
+  278 ?        S      0:00 [scsi_eh_3]
+  279 ?        I<     0:00 [scsi_tmf_3]
+  280 ?        S      0:00 [scsi_eh_4]
+  281 ?        I<     0:00 [scsi_tmf_4]
+  282 ?        S      0:00 [scsi_eh_5]
+  283 ?        I<     0:00 [scsi_tmf_5]
+  294 ?        I<     0:00 [e1000e]
+  295 ?        I<     0:00 [kworker/1:1H-kb]
+  318 ?        S      0:00 [jbd2/sda5-8]
+  319 ?        I<     0:00 [ext4-rsv-conver]
+  320 ?        I<     0:00 [kworker/0:1H-kb]
+  330 ?        I<     0:00 [kworker/3:1H-kb]
+  334 ?        I<     0:00 [kworker/2:1H-kb]
+  376 ?        S<s    0:01 /lib/systemd/systemd-journald
+  398 ?        Ss     0:00 /lib/systemd/systemd-udevd
+  401 ?        S<     0:00 [loop0]
+  404 ?        S<     0:00 [loop1]
+  416 ?        S<     0:00 [loop2]
+  424 ?        S<     0:00 [loop3]
+  430 ?        S<     0:00 [loop4]
+  459 ?        S<     0:00 [loop5]
+  460 ?        S<     0:00 [loop6]
+  471 ?        S<     0:00 [loop7]
+  476 ?        S<     0:00 [loop8]
+  484 ?        S<     0:00 [loop9]
+  492 ?        S<     0:00 [loop10]
+  495 ?        S      0:00 [irq/31-mei_me]
+  541 ?        Ss     0:00 /lib/systemd/systemd-networkd
+  567 ?        S<     0:00 [loop11]
+  579 ?        S<     0:00 [loop12]
+  586 ?        Ss     0:00 /lib/systemd/systemd-resolved
+  600 ?        S<     0:00 [loop13]
+  618 ?        S<     0:00 [loop14]
+  619 ?        S<     0:00 [loop15]
+  678 ?        S<     0:00 [loop16]
+  681 ?        S<     0:00 [loop17]
+  689 ?        S<     0:00 [loop18]
+  692 ?        S<     0:00 [loop19]
+  693 ?        S<     0:00 [loop20]
+  694 ?        S<     0:00 [loop21]
+  695 ?        S<     0:00 [loop22]
+  696 ?        S<     0:00 [loop23]
+  697 ?        S<     0:00 [loop24]
+  698 ?        S<     0:00 [loop25]
+  699 ?        S<     0:00 [loop26]
+  709 ?        I<     0:00 [cryptd]
+  711 ?        S      0:00 [nv_queue]
+  712 ?        S      0:00 [nv_queue]
+  713 ?        Ss     0:00 /usr/sbin/acpid
+  715 ?        Ss     0:04 /usr/sbin/rngd -f
+  718 ?        Ss     0:00 /usr/sbin/sssd -i --logger=files
+  730 ?        S<     0:01 /usr/sbin/atopacctd
+  743 ?        Ss     0:00 /usr/sbin/cron -f
+  749 ?        S      0:00 [nvidia-modeset/]
+  751 ?        S      0:00 [nvidia-modeset/]
+  752 ?        Ss     0:02 avahi-daemon: running [gold00.local]
+  753 ?        Ss     0:01 /usr/bin/dbus-daemon --system --address=systemd: --no
+  755 ?        S<     0:00 [loop27]
+  785 ?        S      0:00 avahi-daemon: chroot helper
+  792 ?        S<     0:00 [loop28]
+  805 ?        S<     0:00 [loop29]
+  821 ?        I<     0:00 [iprt-VBoxWQueue]
+  822 ?        S<     0:00 [loop30]
+  827 ?        S      0:00 [iprt-VBoxTscThr]
+  830 ?        S<     0:00 [loop31]
+  832 ?        S<     0:00 [loop32]
+  833 ?        S      0:19 /usr/lib/x86_64-linux-gnu/sssd/sssd_be --domain AD.CA
+  834 ?        Ss     0:00 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+  835 ?        Ssl    0:00 /usr/sbin/NetworkManager --no-daemon
+  836 ?        Ssl    0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-s
+  837 ?        Ssl    0:01 /usr/sbin/irqbalance --foreground
+  841 ?        Ssl    0:01 /usr/sbin/thermald --no-daemon --dbus-enable
+  843 ?        Ss     0:00 /usr/sbin/atd -f
+  844 ?        Ssl    0:05 /usr/lib/udisks2/udisksd
+  885 ?        S      0:09 /usr/lib/x86_64-linux-gnu/sssd/sssd_nss --uid 0 --gid
+  886 ?        S      0:00 /usr/lib/x86_64-linux-gnu/sssd/sssd_pam --uid 0 --gid
+  887 ?        S      0:00 /usr/lib/x86_64-linux-gnu/sssd/sssd_pac --uid 0 --gid
+  889 ?        S      0:00 [UVM global queu]
+  890 ?        S      0:03 /usr/lib/postgresql/10/bin/postgres -D /var/lib/postg
+  891 ?        S      0:00 [UVM deferred re]
+  892 ?        Ssl    0:00 /usr/lib/policykit-1/polkitd --no-debug
+  894 ?        S      0:00 [UVM Tools Event]
+  902 ?        Ssl    0:05 /usr/lib/snapd/snapd
+  936 ?        Ss     0:00 /lib/systemd/systemd-logind
+  937 ?        Ssl    0:00 /usr/lib/accountsservice/accounts-daemon
+  947 ?        Ss     0:03 /usr/bin/perl /usr/local/scripts/computerinfodaemon.p
+  952 ?        Ssl    0:02 /opt/puppetlabs/puppet/bin/ruby /opt/puppetlabs/puppe
+  962 ?        Ss     0:00 /usr/sbin/sshd -D
+  971 ?        Ssl    0:01 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -u 107:111
+  989 ?        Ssl    0:00 /usr/lib/colord/colord
+ 1018 ?        Ss     0:00 postgres: 10/main: checkpointer process   
+ 1019 ?        Ss     0:00 postgres: 10/main: writer process   
+ 1020 ?        Ss     0:00 postgres: 10/main: wal writer process   
+ 1021 ?        Ss     0:00 postgres: 10/main: autovacuum launcher process   
+ 1022 ?        Ss     0:01 postgres: 10/main: stats collector process   
+ 1023 ?        Ss     0:00 postgres: 10/main: bgworker: logical replication laun
+ 1119 ?        Ssl    0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unatt
+ 1146 ?        Ss     0:00 /usr/bin/nvidia-persistenced --user nvidia-persistenc
+ 1372 ?        Ssl    0:00 /usr/bin/whoopsie -f
+ 1374 ?        Ss     0:01 /usr/sbin/inetd
+ 1409 ?        I<     0:00 [ceph-msgr]
+ 1426 ?        I<     0:00 [ceph-watch-noti]
+ 1427 ?        I<     0:00 [ceph-completion]
+ 1480 ?        Sl     0:00 /usr/bin/mono /usr/lib/mono/4.5/xsp4.exe --port 8084 
+ 1484 ?        Ssl    0:00 /usr/bin/sddm
+ 1486 ?        Ss     0:00 /usr/sbin/kerneloops --test
+ 1489 ?        Ss     0:00 /usr/sbin/kerneloops
+ 1492 tty1     Ssl+   0:00 /usr/lib/xorg/Xorg -nolisten tcp -auth /var/run/sddm/
+ 1519 ?        S      1:20 [irq/33-nvidia]
+ 1520 ?        S      0:00 [nvidia]
+ 1522 ?        S      0:31 [nv_queue]
+ 1568 ?        Ss     0:00 /usr/lib/postfix/sbin/master -w
+ 1570 ?        S      0:00 qmgr -l -t fifo -u
+ 1585 ?        S      0:00 /usr/lib/x86_64-linux-gnu/sddm/sddm-helper --socket /
+ 1588 ?        Ss     0:00 /lib/systemd/systemd --user
+ 1589 ?        S      0:00 (sd-pam)
+ 1600 ?        Sl     3:08 /usr/bin/sddm-greeter --socket /tmp/sddm-:0-AkgfXF --
+ 1605 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+ 2870 ?        Ssl    0:00 /usr/lib/packagekit/packagekitd
+ 2930 ?        Ssl    0:00 /usr/sbin/rsyslogd -n
+ 3127 ?        I      0:00 [kworker/3:1-cgr]
+ 3305 ?        I      0:00 [kworker/2:1-e10]
+ 5665 ?        S<Ls   0:11 /usr/bin/atop -R -w /var/log/atop/atop_20200314 600
+ 5933 ?        Ss     0:00 /lib/systemd/systemd --user
+ 5934 ?        S      0:00 (sd-pam)
+ 5988 ?        Ss     0:00 /usr/sbin/cupsd -l
+ 5989 ?        Ssl    0:00 /usr/sbin/cups-browsed
+ 6073 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+ 6150 ?        S      0:00 /usr/lib/x86_64-linux-gnu/xfce4/xfconf/xfconfd
+ 6154 ?        SLs    0:00 /usr/bin/gpg-agent --supervised
+ 6183 ?        Sl     0:00 /usr/lib/dconf/dconf-service
+ 6191 ?        SNsl   0:00 /usr/lib/rtkit/rtkit-daemon
+ 6219 ?        Sl     0:00 /usr/bin/python3 /usr/share/system-config-printer/app
+ 6220 ?        Ssl    0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+ 6234 ?        S      0:00 /usr/bin/dbus-daemon --config-file=/usr/share/default
+ 6235 ?        Ssl    0:00 /usr/lib/upower/upowerd
+ 6236 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd
+ 6266 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/208231/gvfs -f -o 
+ 6332 ?        Ssl    0:04 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+ 6355 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 6360 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 6365 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 6370 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 6380 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.21 /org/gtk/gv
+ 6386 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd-metadata
+ 6409 ?        Ss     0:00 /usr/lib/bluetooth/obexd
+ 6778 ?        Ss     0:00 sshd: root@pts/0
+ 6780 ?        Ss     0:00 /lib/systemd/systemd --user
+ 6781 ?        S      0:00 (sd-pam)
+ 6855 pts/0    Ss+    0:00 -bash
+ 6976 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+ 6978 ?        Sl     0:00 /usr/bin/gnome-keyring-daemon --start --foreground --
+ 7785 ?        I      0:00 [kworker/0:3-eve]
+ 7914 ?        I      0:00 [kworker/u16:2-e]
+12455 ?        I      0:00 [kworker/u16:1-e]
+13153 ?        S      0:00 /usr/sbin/xrdp-sesman
+13163 ?        S      0:00 /usr/sbin/xrdp
+16867 ?        I      0:00 [kworker/1:0-eve]
+21476 ?        I      0:00 [kworker/1:4-eve]
+21659 ?        I      0:00 [kworker/2:0-cgr]
+26038 ?        I      0:00 [kworker/3:3-eve]
+26135 ?        Ss     0:00 sshd: tnm6 [priv]
+26137 ?        Ss     0:00 /lib/systemd/systemd --user
+26138 ?        S      0:00 (sd-pam)
+26234 ?        R      0:00 sshd: tnm6@pts/1
+26235 pts/1    Ss     0:00 -bash
+26314 ?        I      0:00 [kworker/u16:0-e]
+26315 ?        S      0:00 pickup -l -t fifo -u
+26328 ?        I      0:00 [kworker/u16:3-e]
+26359 pts/1    S+     0:00 script submission.script
+26360 pts/2    Ss     0:00 bash -i
+26370 pts/2    S+     0:00 ./mnshell
+26388 pts/2    R+     0:00 ps -ax
+29375 ?        Ss     0:00 /lib/systemd/systemd --user
+29376 ?        S      0:00 (sd-pam)
+29512 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+29589 ?        S      0:00 /usr/lib/x86_64-linux-gnu/xfce4/xfconf/xfconfd
+29593 ?        SLs    0:00 /usr/bin/gpg-agent --supervised
+29644 ?        Sl     0:00 /usr/lib/dconf/dconf-service
+29646 ?        Ssl    0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+29653 ?        Sl     0:00 /usr/bin/python3 /usr/share/system-config-printer/app
+29663 ?        S      0:00 /usr/bin/dbus-daemon --config-file=/usr/share/default
+29685 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd
+29700 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/366209/gvfs -f -o 
+29749 ?        Ssl    0:03 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+29762 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-goa-volume-monitor
+29767 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+29771 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+29776 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+29783 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.28 /org/gtk/gv
+29788 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd-metadata
+29801 ?        Ss     0:00 /usr/lib/bluetooth/obexd
+30766 ?        I      0:00 [kworker/0:0-eve]
+ls
+CommandLine.cpp  MNShell.cpp  Path.cpp	Prompt.cpp  main.cpp  submission.script
+CommandLine.h	 MNShell.h    Path.h	Prompt.h    mnshell   tester
+/home/tnm6/232/homework04$ cd ../../ whatifiaddedthis
+Invalid usage (use "cd <directory>")...
+/home/tnm6/232/homework04$ pwd orthis
+Invalid usage (use "pwd")...
+/home/tnm6/232/homework04$ exit
+Leaving now...
+]0;tnm6@gold00: ~/232/homework04[01;32mtnm6@gold00[00m:[01;34m~/232/homework04[00m$ exit
+exit
+
+Script done on 2020-03-14 23:30:03-0400
