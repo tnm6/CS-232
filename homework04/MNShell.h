@@ -30,4 +30,4 @@ private:
   void runProgram(const CommandLine &cmdLine, char *command);
 };
 
-#endif
+#endif  // MN_SHELL_H_

@@ -1,23 +1,25 @@
 /*
 CommandLine.cpp - class that reads a commandline
-Written by: Marcos Hernandez (mah47) and Nathan Meyer
-CS232 - Homework 4
+Written by: Marcos Hernandez (mah47) and Nathan Meyer (tnm6)
+CS232 - Homework 4, Prof. Victor Norman, Calvin University
 March 14, 2020
+IMPORTANT NOTE: Extension given by Prof. Norman
 */
-
-
 
 #include "CommandLine.h"
 #include <stdlib.h>
 #include <vector>
 #include <cstring>
-// #include <iostream>
 using namespace std;
 
-//http://www.cplusplus.com/reference/istream/istream/get/
+/*
+ * Constructor which takes input and parses it into variables argc and argv
+ * If an ampersand is found, bool noAmp is set to false
+ */
 CommandLine::CommandLine(istream &in)
 {
   argc = 0;
+  noAmp = true;
 
   char *input = new char[CL_SIZE];
   char **tempVec = new char *[CL_SIZE];
@@ -28,9 +30,13 @@ CommandLine::CommandLine(istream &in)
   command = strtok(input, " ");
   while (command != NULL)
   {
+    if (strcmp(command, "&") == 0)
+    {
+      noAmp = false;
+      break;
+    }
     tempVec[argc] = command;
     argc++;
-    // cout << "Printing " << command << endl;
     command = strtok(NULL, " ");
   }
 
@@ -61,11 +67,7 @@ char* CommandLine::getArgVector(int i) const
 
 bool CommandLine::noAmpersand() const
 {
-  if (strcmp(argv[argc-1], "&") == 0)
-  {
-    return false;
-  }
-  return true;
+  return noAmp;
 }
 
 CommandLine::~CommandLine()
