@@ -42,10 +42,10 @@ void MNShell::run()
         {
           cout << "Directory not found..." << endl;
         }
-        else
-        {
-          Prompt;
-        }
+        // else
+        // {
+        //   Prompt;
+        // }
         continue;
       }
       if (path.find(command) == -1)
