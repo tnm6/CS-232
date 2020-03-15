@@ -45,7 +45,7 @@ void MNShell::readCmdLine(const CommandLine &cmdLine)
     }
     else if (strcmp(command, "pwd") == 0)
     {
-      cout << prompt.get() << endl;
+      printDir(cmdLine);
     }
     else if (strcmp(command, "cd") == 0)
     {
