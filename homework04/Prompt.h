@@ -7,7 +7,6 @@ class Prompt
 {
 public:
   Prompt();
-  ~Prompt();
   char *get() const;
 
 private:

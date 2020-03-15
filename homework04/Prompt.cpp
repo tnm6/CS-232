@@ -10,7 +10,3 @@ char *Prompt::get() const
 {
   return workingDir;
 }
-
-Prompt::~Prompt(){
-
-}
