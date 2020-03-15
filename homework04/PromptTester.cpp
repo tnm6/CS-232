@@ -1,3 +1,12 @@
+/*
+PromptTester.cpp tests prompt commandline
+Written by: Marcos Hernandez (mah47) and Nathan Meyer
+CS232 - Homework 4
+March 14, 2020
+*/
+
+
+
 #include "PromptTester.h"
 #include <cassert>
 #include <iostream>

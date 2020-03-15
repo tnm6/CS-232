@@ -1,3 +1,13 @@
+/*
+CommandLine.h simulates a shell program
+Written by: Marcos Hernandez (mah47) and Nathan Meyer
+CS232 - Homework 4
+March 14, 2020
+*/
+
+
+
+
 #ifndef COMMAND_LINE_H_
 #define COMMAND_LINE_H_
 

@@ -1,3 +1,11 @@
+/*
+CommandLineTester.cpp tests commandline
+Written by: Marcos Hernandez (mah47) and Nathan Meyer
+CS232 - Homework 4
+March 14, 2020
+*/
+
+
 #include "CommandLineTester.h"
 #include <iostream>
 using namespace std;

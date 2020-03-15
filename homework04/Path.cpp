@@ -1,3 +1,12 @@
+/*
+Path.cpp represents directories, shell program searches for executable programs
+Written by: Marcos Hernandez (mah47) and Nathan Meyer
+CS232 - Homework 4
+March 14, 2020
+*/
+
+
+
 #include "Path.h"
 #include <dirent.h>
 #include <stdexcept>

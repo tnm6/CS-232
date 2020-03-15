@@ -1,17 +1,24 @@
+/*
+MNShell.cpp simulates a shell program
+Written by: Marcos Hernandez (mah47) and Nathan Meyer
+CS232 - Homework 4
+March 14, 2020
+*/
+
+
+
 #include "MNShell.h"
-#include "CommandLine.h"
 #include <iostream>
 #include <string>
 #include <cstring>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <stdio.h>
+#include <cstdlib>
 using namespace std;
 
 MNShell::MNShell()
 {
-  // path = Path();
-  // prompt = Prompt();
 }
 
 void MNShell::run()
@@ -19,75 +26,90 @@ void MNShell::run()
   while (true)
   {
     cout << prompt.get() << "$ " << flush;
-    CommandLine mn(cin);
+    CommandLine cmdLine(cin);
+    evaluateCmdLine(cmdLine);
+  }
+}
 
-    char *command = mn.getCommand();
+void MNShell::evaluateCmdLine(const CommandLine &cmdLine)
+{
+  char *command = cmdLine.getCommand();
 
-    if (mn.getArgCount() > 0)
+  if (cmdLine.getArgCount() > 0)
+  {
+    if (strcmp(command, "exit") == 0)
     {
-      if (strcmp(command, "exit") == 0)
-      {
-        cout << "Leaving now..." << endl;
-        break;
-      }
-      else if (strcmp(command, "pwd") == 0)
-      {
-        cout << prompt.get() << endl;
-        continue;
-      }
-      else if (strcmp(command, "cd") == 0)
-      {
-        char *newDir = mn.getArgVector(1);
-        if (chdir(newDir) == -1)
-        {
-          cerr << "Invalid directory" << endl;
-        }
-        else
-        {
-          prompt = Prompt();
-        }
-        
-        // int userCommand = chdir(mn.getArgVector(1));
-        // if (userCommand == -1)
-        // {
-        //   cout << "Directory not found..." << endl;
-        // }
-        // continue;
-      }
-      else if (path.find(command) == -1)
-      {
-        cout << "Command does not exist...." << endl;
-      }
-      else
-      {
-        pid_t readCommand = fork();
-        if (readCommand == -1)
-        {
-          cout << "Failed..." << endl;
-        }
-        if (readCommand == 0)
-        {
-          int comm = path.find(command);
-          string forkcomm = path.getDirectory(comm) + "/" + mn.getCommand();
-          char **forkcomm2 = mn.getArgVector();
-          forkcomm[mn.getArgCount()] = NULL;
-          execve(forkcomm.c_str(), forkcomm2, NULL);
-        }
-
-        int result;
-        if (mn.noAmpersand())
-        {
-          waitpid(readCommand, &result, 0);
-        }
-      }
+      cout << "Leaving now..." << endl;
+      exit(0);
+    }
+    else if (strcmp(command, "pwd") == 0)
+    {
+      cout << prompt.get() << endl;
+    }
+    else if (strcmp(command, "cd") == 0)
+    {
+      changeDir(cmdLine);
+    }
+    else if (path.find(command) == -1)
+    {
+      cout << "Command does not exist...." << endl;
+    }
+    else
+    {
+      forkProcess(cmdLine, command);
     }
   }
 }
 
-/*
- MNShell::~MNShell()
+void MNShell::changeDir(const CommandLine &cmdLine)
 {
-     path.~Path();
-     prompt.~Prompt();
+  char *newDir = cmdLine.getArgVector(1);
+  if (chdir(newDir) == -1)
+  {
+    cerr << "Invalid directory" << endl;
+  }
+  else
+  {
+    prompt = Prompt();
+  }
 }
-*/
+
+void MNShell::forkProcess(const CommandLine &cmdLine, char *command)
+{
+  pid_t child_process;
+  child_process = fork();
+
+  if (child_process < 0)
+  {
+    cerr << "Forking process failed..." << endl;
+  }
+  else if (child_process == 0)
+  {
+    runProgram(cmdLine, command);
+  }
+  else
+  {
+    if (cmdLine.noAmpersand())
+    {
+      waitpid(child_process, NULL, 0);
+    }
+  }
+}
+
+void MNShell::runProgram(const CommandLine &cmdLine, char *command)
+{
+  string cmd(command); // convert char* command to string
+  int pathIndex = path.find(cmd);
+  if (pathIndex == -1)
+  {
+    cerr << "Command not found..." << endl;
+  }
+  else
+  {
+    string cmdPath = path.getDirectory(pathIndex) + "/" + cmd;
+    execve(cmdPath.c_str(), cmdLine.getArgVector(), NULL);
+
+    // Error message if execve does not return
+    cerr << command << " failed..." << endl;
+  }
+}

@@ -1,3 +1,12 @@
+/*
+CommandLine.cpp - class that reads a commandline
+Written by: Marcos Hernandez (mah47) and Nathan Meyer
+CS232 - Homework 4
+March 14, 2020
+*/
+
+
+
 #include "CommandLine.h"
 #include <stdlib.h>
 #include <vector>
@@ -8,29 +17,6 @@ using namespace std;
 //http://www.cplusplus.com/reference/istream/istream/get/
 CommandLine::CommandLine(istream &in)
 {
-  // argc = 0;                            // init argc
-  // int const size = 256;                // default size for input char array
-  // char **ArgVector = new char *[size]; // init dummy argv
-  // char *input = new char[size];        // input char array
-  // char *point;
-
-  // in.getline(input, size); // grab input
-
-  // if (input != NULL)
-  // {
-  //   point = strtok(input, " "); // create pointer
-
-  //   while (point != NULL)
-  //   {
-  //     ArgVector[argc] = point; // set argv to proper command
-  //     argc++;                  // increment argc
-  //     //cout << point << endl;
-  //     point = strtok(NULL, " "); // move pointer
-  //   }
-  // }
-  // argv = new char *;
-  // argv = ArgVector;
-
   argc = 0;
 
   char *input = new char[CL_SIZE];
@@ -50,6 +36,7 @@ CommandLine::CommandLine(istream &in)
 
   argv = new char*;
   argv = tempVec;
+  argv[argc] = NULL;  // make sure argv is null terminated
 }
 
 char* CommandLine::getCommand() const

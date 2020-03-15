@@ -1,3 +1,12 @@
+/*
+tester.cpp tests pathtester and prompttester
+Written by: Marcos Hernandez (mah47) and Nathan Meyer
+CS232 - Homework 4
+March 14, 2020
+*/
+
+
+
 #include "PathTester.h"
 #include "PromptTester.h"
 // #include "CommandLineTester.h"
