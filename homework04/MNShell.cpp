@@ -30,25 +30,31 @@ void MNShell::run()
         cout << "Leaving now..." << endl;
         break;
       }
-      if (strcmp(command, "pwd") == 0)
+      else if (strcmp(command, "pwd") == 0)
       {
         cout << prompt.get() << endl;
         continue;
       }
-      if (strcmp(command, "cd") == 0)
+      else if (strcmp(command, "cd") == 0)
       {
-        int userCommand = chdir(mn.getArgVector(1));
-        if (userCommand == -1)
+        char *newDir = mn.getArgVector(1);
+        if (chdir(newDir) == -1)
         {
-          cout << "Directory not found..." << endl;
+          cerr << "Invalid directory" << endl;
         }
-        // else
+        else
+        {
+          prompt = Prompt();
+        }
+        
+        // int userCommand = chdir(mn.getArgVector(1));
+        // if (userCommand == -1)
         // {
-        //   Prompt;
+        //   cout << "Directory not found..." << endl;
         // }
-        continue;
+        // continue;
       }
-      if (path.find(command) == -1)
+      else if (path.find(command) == -1)
       {
         cout << "Command does not exist...." << endl;
       }
