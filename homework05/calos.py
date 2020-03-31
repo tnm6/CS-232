@@ -63,10 +63,10 @@ class CalOS:
         # Save the CPU's registers to the current process' PCB
         CalOS.current_proc.set_registers(self._cpu.get_registers())
 
-        # If no processes in ready queue, reset timer and clear registers
+        # If no processes in ready queue, reset timer and return
         if len(self._ready_q) == 0:
             self.reset_timer()
-            # no context switch, so CPU registers are correct (no restore needed)
+            # no context switch, CPU registers are correct (no restore needed)
             return
 
         # Switch process and reset timer
@@ -110,6 +110,9 @@ class CalOS:
             self._cpu.run_process()
 
             CalOS.current_proc.set_state(PCB.DONE)
+
+            if self._debug:
+                print("Done running " + str(CalOS.current_proc))
 
 
     def reset_timer(self):
