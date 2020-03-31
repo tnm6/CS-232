@@ -59,10 +59,21 @@ class CalOS:
         # Save the CPU's registers to the current process' PCB
         current_proc.set_registers(self._cpu.get_registers())
 
+        # If no processes in ready queue, reset timer and clear registers
         if self._ready_q.len == 0:
-            self._reset_timer() # TODO: add this function
-            # TODO kill Hitler
-            # also TODO reset registers and stuff
+            self.reset_timer()
+            reg_reset = {
+                'reg0': 0,
+                'reg1': 0,
+                'reg2': 0,
+                'pc': 0
+                }
+            self._cpu.set_registers(reg_reset)
+            return
+
+        # Switch process and reset timer
+        self.context_switch()
+        self.reset_timer()
 
     def context_switch(self):
         '''Do a context switch between the current_proc and the process
