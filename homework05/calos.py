@@ -81,8 +81,8 @@ class CalOS:
         new_proc = self._ready_q.pop(0)
 
         if self._debug:
-            print("Switching procs from " + CalOS.current_proc.get_name() +
-                  " to " + new_proc.get_name())
+            print("Switching procs from {} to {}".format(
+                  CalOS.current_proc.get_name(), new_proc.get_name()))
 
         # Save the current process' registers and
         # load the new process' registers into CPU
@@ -112,7 +112,7 @@ class CalOS:
             CalOS.current_proc.set_state(PCB.DONE)
 
             if self._debug:
-                print("Done running " + str(CalOS.current_proc))
+                print("Done running {}".format(str(CalOS.current_proc)))
 
 
     def reset_timer(self):
