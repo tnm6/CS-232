@@ -57,19 +57,16 @@ class CalOS:
         '''Called when the timer expires. If there is no process in the
         ready queue, reset the timer and continue.  Else, context_switch.
         '''
+        if self._debug:
+            print("Timer expired!")
+
         # Save the CPU's registers to the current process' PCB
         CalOS.current_proc.set_registers(self._cpu.get_registers())
 
         # If no processes in ready queue, reset timer and clear registers
         if len(self._ready_q) == 0:
             self.reset_timer()
-            reg_reset = {
-                'reg0': 0,
-                'reg1': 0,
-                'reg2': 0,
-                'pc': 0
-                }
-            self._cpu.set_registers(reg_reset)
+            # no context switch, so CPU registers are correct (no restore needed)
             return
 
         # Switch process and reset timer
@@ -82,6 +79,10 @@ class CalOS:
         '''
         # Get the new process from ready queue
         new_proc = self._ready_q.pop(0)
+
+        if self._debug:
+            print("Switching procs from " + CalOS.current_proc.get_name() +
+                  " to " + new_proc.get_name())
 
         # Save the current process' registers and
         # load the new process' registers into CPU
