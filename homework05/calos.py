@@ -1,3 +1,12 @@
+'''
+Core CalOS class with added code:
+    timer_isr(self), context_switch(self), and run()
+
+Homework05 assignment for CS-232, Calvin University
+Based on code by Professor Victor Norman
+Completed by Nathan Meyer (tnm6)
+'''
+
 
 DEFAULT_QUANTUM = 3   # very short -- for pedagogical reasons.
 
