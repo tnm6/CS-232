@@ -56,7 +56,13 @@ class CalOS:
         '''Called when the timer expires. If there is no process in the
         ready queue, reset the timer and continue.  Else, context_switch.
         '''
-        pass
+        # Save the CPU's registers to the current process' PCB
+        current_proc.set_registers(self._cpu.get_registers())
+
+        if self._ready_q.len == 0:
+            self._reset_timer() # TODO: add this function
+            # TODO kill Hitler
+            # also TODO reset registers and stuff
 
     def context_switch(self):
         '''Do a context switch between the current_proc and the process
