@@ -1,0 +1,37 @@
+Answers for Homework 5, CS-232
+Professor Victor Norman, Calvin University
+by: Nathan Meyer (tnm6)
+
+
+1.  Where is the PCB class defined?
+  In calos.py
+2.  What information does a PCB object contain?
+  A name; a process id (pid); addresses for: entry point, low end of memory,
+high end of memory; a state; a dictionary of register states; and the quantum
+(how long the process can run before interruption).
+3.  When is a PCB created? Which line in which file creates a PCB?
+  A PCB is created when a program is loaded from memory. This occurs on line
+179 of main.py, where a PCB is attempted to be created in _load_program (if it
+fails, pcb stays set to none, as in line 176).
+4.  What process states have been defined?
+  NEW, READY, RUNNING, WAITING, and DONE
+5.  Regarding the variable current_proc: Where has it been defined and what is
+    its significance?
+  It is defined as a class variable of CalOS in calos.py. It is a reference to
+the PCB of the current (running) process.
+6.  In the TimerController class, what does code that reads
+        with self._mutex:
+            code here...
+    do?
+  It unlocks the thread's mutex lock and sets the countdown timer to the given
+number of cycles (val).
+7.  In the TimerController class, explain what the code does when the countdown
+    goes to 0 (i.e., the time expires).
+  It acquires (locks) the mutex lock for the CPU's interrupt lock, adds its
+device bus address to the set of devices that have raised interrupts, sets the
+interrupt raised boolean on the CPU to true, and then releases (unlocks) the
+CPU's interrupt mutex lock. The countdown variable is then set to NOT_RUNNING,
+which is then set with self._mutex.
+  The previous steps ensure that the timer interrupt is not handled until prior
+interrupts are handled, and that no interrupts following it are handled before
+the timer interrupt either.
