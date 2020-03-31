@@ -99,6 +99,9 @@ class CalOS:
         '''Startup the timer controller and execute processes in the ready
         queue on the given cpu -- i.e., run the operating system!
         '''
+        if self._debug:
+            print("CalOS.run() ready processes = " + str(len(self._ready_q)))
+            
         while len(self._ready_q) != 0:   # ready queue is not empty
             # Set current_proc to PCB from front of ready queue
             CalOS.current_proc = self._ready_q.pop(0)
