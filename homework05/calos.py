@@ -5,6 +5,7 @@ Core CalOS class with added code:
 Homework05 assignment for CS-232, Calvin University
 Based on code by Professor Victor Norman
 Completed by Nathan Meyer (tnm6)
+March 31st, 2020
 '''
 
 
@@ -60,7 +61,7 @@ class CalOS:
         CalOS.current_proc.set_registers(self._cpu.get_registers())
 
         # If no processes in ready queue, reset timer and clear registers
-        if self._ready_q.len == 0:
+        if len(self._ready_q) == 0:
             self.reset_timer()
             reg_reset = {
                 'reg0': 0,
@@ -80,7 +81,7 @@ class CalOS:
         on the front of the ready_q.
         '''
         # Get the new process from ready queue
-        new_proc = self._ready_q.pop()
+        new_proc = self._ready_q.pop(0)
 
         # Save the current process' registers and
         # load the new process' registers into CPU
@@ -90,16 +91,16 @@ class CalOS:
         # Add 'old' process' PCB to ready queue
         self.add_to_ready_q(CalOS.current_proc)
 
-        new_proc.set_state(PCB.READY)
+        new_proc.set_state(PCB.RUNNING)
         CalOS.current_proc = new_proc
 
     def run(self):
         '''Startup the timer controller and execute processes in the ready
         queue on the given cpu -- i.e., run the operating system!
         '''
-        while self._ready_q.len != 0:   # ready queue is not empty
+        while len(self._ready_q) != 0:   # ready queue is not empty
             # Set current_proc to PCB from front of ready queue
-            CalOS.current_proc = self._ready_q.pop()
+            CalOS.current_proc = self._ready_q.pop(0)
 
             self.reset_timer()
 
