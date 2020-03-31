@@ -79,7 +79,19 @@ class CalOS:
         '''Do a context switch between the current_proc and the process
         on the front of the ready_q.
         '''
-        pass
+        # Get the new process from ready queue
+        new_proc = self._ready_q.pop()
+
+        # Save the current process' registers and
+        # load the new process' registers into CPU
+        current_proc.set_registers(self._cpu.get_registers())
+        self._cpu.set_registers(new_proc.get_registers())
+
+        # Add 'old' process' PCB to ready queue
+        self._ready_q.push(current_proc)
+
+        new_proc.set_state(PCB.READY)
+        current_proc = new_proc
 
     def run(self):
         '''Startup the timer controller and execute processes in the ready
