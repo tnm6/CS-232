@@ -1,17 +1,26 @@
+/**
+ * homework06
+ * Busy Bake Shop exercise using pthreads and semaphores
+ * 
+ * CS-232, Calvin University, Professor Victor Norman
+ * @author  Nathan Meyer
+ * @date    4/11/2020
+ */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <semaphore.h>
 #include <pthread.h>
 
-#define MAX_CUST_QUEUE 5
+#define MAX_CUST_QUEUE 5  // only 5 customers in store at a time
 #define N_CUSTOMERS 10
 #define WAIT_TIME 1000000
 
-sem_t cust_queue;
-sem_t loaves;
-sem_t busy;
-sem_t payment;
-sem_t receipt;
+sem_t cust_queue; // how many customers are in the store
+sem_t loaves;     // how many bread loaves are ready
+sem_t busy;       // if the baker is busy or not
+sem_t payment;    // if payment is ready or not
+sem_t receipt;    // if receipt is ready or not
 
 void* bake(void* arg) {
   for (int i = 0; i < N_CUSTOMERS; i++) {
@@ -31,7 +40,7 @@ void* bake(void* arg) {
 
 void* checkout(void* arg) {
   for (int i = 0; i < N_CUSTOMERS; i++) {
-    sem_wait(&payment);
+    sem_wait(&payment); // only continue if payment is ready
     sem_wait(&busy);
 
     fprintf(stderr,
@@ -79,29 +88,19 @@ int main(int argc, char** argv) {
   fprintf(stderr, "Bakery starting up. Why don't we do curbside delivery?\n");
 
   // create the necessary semaphores
-  sem_init(&cust_queue, 0, MAX_CUST_QUEUE);
+  sem_init(&cust_queue, 0, MAX_CUST_QUEUE); // only 5 customers at a time
+  sem_init(&busy, 0, 1);    // unlocked (not busy) at start
   sem_init(&loaves, 0, 0);
-  sem_init(&busy, 0, 1);
   sem_init(&payment, 0, 0);
   sem_init(&receipt, 0, 0);
 
-  // priority garbage stuff
-  struct sched_param param;
-  pthread_attr_t attr;
-  pthread_attr_init(&attr);
-  pthread_attr_setschedpolicy(&attr, SCHED_RR);
-  param.sched_priority = sched_get_priority_min(SCHED_RR);
-  pthread_attr_setschedparam(&attr, &param);
-
-  // create necessary threads
+  // create and execute threads
   pthread_create(&b_bake, NULL, bake, NULL);
   pthread_create(&b_checkout, NULL, checkout, NULL);
-  for (i = 0; i < N_CUSTOMERS-1; i++) {
-    pthread_create(&customers[i], &attr, enter, (void*) i+1);
+  for (i = 0; i < N_CUSTOMERS; i++) {
+    pthread_create(&customers[i], NULL, enter, (void*) i+1);
   }
-  param.sched_priority = sched_get_priority_max(SCHED_RR);
-  pthread_attr_setschedparam(&attr, &param);
-  pthread_create(&customers[i], &attr, enter, (void*) i+1);
 
+  // only exit when all threads are done
   pthread_exit(NULL);
 }

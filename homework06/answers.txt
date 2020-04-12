@@ -25,4 +25,6 @@ locking and unlocking semaphores, other threads could still progress further
 than the higher priority thread. Since higher priority only determines what the
 OS does when it and other threads reach a critical section at the same time, it
 makes sense that this prioritization would not make much difference if the
-lower priority threads are simply further along in the process than it is.
+lower priority threads are simply further along in the process than it is. This
+is likely especially the case since, by the time the last thread is done being
+forked, other threads are already relatively far along in the program.
