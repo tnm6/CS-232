@@ -1,0 +1,28 @@
+Homework 6: Busy Bake Shop
+CS-232, Professor Victor Norman, Calvin University
+Answers by Nathan Meyer (tnm6)
+
+1.  Does your program run the same way each time? Why?
+  The program does not run in the same order. This is likely because, although
+vital information (like the amount of bread loaves available, receipts
+available, etc.) are protected by semaphores, the threads otherwise "race" to
+each step in their in respective functions. For example, threads 1-5 might be
+the first to finish being forked and run their function on the first program
+run, but a completely different set of threads might in the next run. Since the
+customer queue stops the rest of the threads from continuing on until one of
+the first threads has finished, this changes the order each time. The same can
+be said for other steps like receiving bread and receipts.
+
+2.  Give your last customer thread the highest priority. Does this ensure that
+    this customer is always given first priority? Why or why not?
+  No, it does not. After several attempts at setting schedule parameters, and
+running the program several times, the last (10th) customer would not reliably
+show priority once it was created. In fact, it seemed to be just as random as
+without setting any priority (even when all other threads were set to low
+priority). This could be due to the same race-like conditions as described in
+answer 1. Since each customer has to linearly progress through several sets of
+locking and unlocking semaphores, other threads could still progress further
+than the higher priority thread. Since higher priority only determines what the
+OS does when it and other threads reach a critical section at the same time, it
+makes sense that this prioritization would not make much difference if the
+lower priority threads are simply further along in the process than it is.
