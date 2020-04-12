@@ -17,16 +17,16 @@ void* bake(void* arg) {
   for (int i = 0; i < N_CUSTOMERS; i++) {
     sem_wait(&busy);
 
-    fprintf(stderr, "No time like the present to bake that bread.\n");
+    fprintf(stderr, "BAKER: No time like the present to bake that bread.\n");
     usleep(WAIT_TIME);
     sem_post(&loaves);
-    fprintf(stderr, "Some more scrumptious bread has been baked.\n");
+    fprintf(stderr, "BAKER: Some more scrumptious bread has been baked.\n");
 
     sem_post(&busy);
     usleep(WAIT_TIME);
   }
 
-  fprintf(stderr, "Baker has finished baking that dough.\n");
+  fprintf(stderr, "BAKER: Bread has been thoroughly baked.\n");
 }
 
 void* checkout(void* arg) {
@@ -35,11 +35,12 @@ void* checkout(void* arg) {
     sem_wait(&busy);
 
     fprintf(stderr,
-            "Time is money, but money takes time: processing payment.\n");
+            "BAKER: Processing payment. Washing hands.\n");
     usleep(WAIT_TIME);
 
     sem_post(&receipt);
-    fprintf(stderr, "Bread for that bread received. Receipt given.\n");
+    fprintf(stderr, "BAKER: Receipt given, hopefully uncontaminated.\n");
+    usleep(WAIT_TIME);
 
     sem_post(&busy);
   }
@@ -47,31 +48,35 @@ void* checkout(void* arg) {
 
 void* enter(void* id) {
   unsigned long myID = (unsigned long) id;
+
   sem_wait(&cust_queue);
-  fprintf(stderr, "Customer %lu has begun his bread journey.\n", myID);
+  fprintf(stderr, 
+          "CUSTOMER %lu: I begin my bread journey. Mask on. Entering store.\n",
+          myID);
 
   sem_wait(&loaves);
-
-  fprintf(stderr, "Customer %lu has that fresh, delicious loaf.\n", myID);
+  fprintf(stderr, "CUSTOMER %lu: I got that fresh, delicious loaf.\n", myID);
+  
   usleep(WAIT_TIME);
 
   sem_post(&payment);
-  fprintf(stderr, "Customer %lu gave some bread to get bread.\n", myID);
+  fprintf(stderr, "CUSTOMER %lu: I gave some bread to get bread.\n", myID);
 
   sem_wait(&receipt);
-  fprintf(stderr, "Customer %lu got his receipt.\n", myID);
+  fprintf(stderr, "CUSTOMER %lu: I got my receipt.\n", myID);
 
   sem_post(&cust_queue);
   fprintf(stderr,
-          "Customer %lu has fulfilled his bread journey and left the store.\n",
+          "CUSTOMER %lu: I've fulfilled my bread journey. Back to isolation.\n",
           myID);
 }
 
 int main(int argc, char** argv) {
-  pthread_t b_bake, b_checkout;
-  pthread_t customers[N_CUSTOMERS];
+  unsigned long i;
+  pthread_t b_bake, b_checkout;     // Baker threads
+  pthread_t customers[N_CUSTOMERS]; // Customer threads
 
-  fprintf(stderr, "Bakery starting up...\n");
+  fprintf(stderr, "Bakery starting up. Why don't we do curbside delivery?\n");
 
   // create the necessary semaphores
   sem_init(&cust_queue, 0, MAX_CUST_QUEUE);
@@ -83,11 +88,9 @@ int main(int argc, char** argv) {
   // create necessary threads
   pthread_create(&b_bake, NULL, bake, NULL);
   pthread_create(&b_checkout, NULL, checkout, NULL);
-  
-  for (unsigned long i = 0; i < N_CUSTOMERS; i++) {
+  for (i = 0; i < N_CUSTOMERS; i++) {
     pthread_create(&customers[i], NULL, enter, (void*) i+1);
   }
 
   pthread_exit(NULL);
-  return 0;
 }
