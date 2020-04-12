@@ -17,21 +17,22 @@
 #define WAIT_TIME 1000000
 
 sem_t cust_queue; // how many customers are in the store
-sem_t loaves;     // how many bread loaves are ready
-sem_t busy;       // if the baker is busy or not
+sem_t bread;      // how many bread loaves are ready
+sem_t b_busy;     // if the baker is busy or not
+sem_t c_busy;     // if checkout is busy w/customer or not
 sem_t payment;    // if payment is ready or not
 sem_t receipt;    // if receipt is ready or not
 
 void* bake(void* arg) {
   for (int i = 0; i < N_CUSTOMERS; i++) {
-    sem_wait(&busy);
+    sem_wait(&b_busy);
 
     fprintf(stderr, "BAKER: No time like the present to bake that bread.\n");
     usleep(WAIT_TIME);
-    sem_post(&loaves);
+    sem_post(&bread);
     fprintf(stderr, "BAKER: Some more scrumptious bread has been baked.\n");
 
-    sem_post(&busy);
+    sem_post(&b_busy);
     usleep(WAIT_TIME);
   }
 
@@ -41,7 +42,7 @@ void* bake(void* arg) {
 void* checkout(void* arg) {
   for (int i = 0; i < N_CUSTOMERS; i++) {
     sem_wait(&payment); // only continue if payment is ready
-    sem_wait(&busy);
+    sem_wait(&b_busy);
 
     fprintf(stderr,
             "BAKER: Processing payment. Washing hands.\n");
@@ -50,7 +51,7 @@ void* checkout(void* arg) {
     sem_post(&receipt);
     fprintf(stderr, "BAKER: Receipt given, hopefully uncontaminated.\n");
 
-    sem_post(&busy);
+    sem_post(&b_busy);
     usleep(WAIT_TIME);
   }
 }
@@ -63,16 +64,18 @@ void* enter(void* id) {
           "CUSTOMER %lu: I begin my bread journey. Mask on. Entering store.\n",
           myID);
 
-  sem_wait(&loaves);
+  sem_wait(&bread);
   fprintf(stderr, "CUSTOMER %lu: I got that fresh, delicious loaf.\n", myID);
   
   usleep(WAIT_TIME);
 
+  sem_wait(&c_busy);
   sem_post(&payment);
   fprintf(stderr, "CUSTOMER %lu: I gave some bread to get bread.\n", myID);
 
   sem_wait(&receipt);
   fprintf(stderr, "CUSTOMER %lu: I got my receipt.\n", myID);
+  sem_post(&c_busy);
 
   sem_post(&cust_queue);
   fprintf(stderr,
@@ -89,8 +92,9 @@ int main(int argc, char** argv) {
 
   // create the necessary semaphores
   sem_init(&cust_queue, 0, MAX_CUST_QUEUE); // only 5 customers at a time
-  sem_init(&busy, 0, 1);    // unlocked (not busy) at start
-  sem_init(&loaves, 0, 0);
+  sem_init(&b_busy, 0, 1);    // unlocked (not busy) at start
+  sem_init(&c_busy, 0, 1);
+  sem_init(&bread, 0, 0);
   sem_init(&payment, 0, 0);
   sem_init(&receipt, 0, 0);
 
