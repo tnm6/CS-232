@@ -40,9 +40,9 @@ void* checkout(void* arg) {
 
     sem_post(&receipt);
     fprintf(stderr, "BAKER: Receipt given, hopefully uncontaminated.\n");
-    usleep(WAIT_TIME);
 
     sem_post(&busy);
+    usleep(WAIT_TIME);
   }
 }
 
@@ -85,12 +85,23 @@ int main(int argc, char** argv) {
   sem_init(&payment, 0, 0);
   sem_init(&receipt, 0, 0);
 
+  // priority garbage stuff
+  struct sched_param param;
+  pthread_attr_t attr;
+  pthread_attr_init(&attr);
+  pthread_attr_setschedpolicy(&attr, SCHED_RR);
+  param.sched_priority = sched_get_priority_min(SCHED_RR);
+  pthread_attr_setschedparam(&attr, &param);
+
   // create necessary threads
   pthread_create(&b_bake, NULL, bake, NULL);
   pthread_create(&b_checkout, NULL, checkout, NULL);
-  for (i = 0; i < N_CUSTOMERS; i++) {
-    pthread_create(&customers[i], NULL, enter, (void*) i+1);
+  for (i = 0; i < N_CUSTOMERS-1; i++) {
+    pthread_create(&customers[i], &attr, enter, (void*) i+1);
   }
+  param.sched_priority = sched_get_priority_max(SCHED_RR);
+  pthread_attr_setschedparam(&attr, &param);
+  pthread_create(&customers[i], &attr, enter, (void*) i+1);
 
   pthread_exit(NULL);
 }
