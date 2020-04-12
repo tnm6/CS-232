@@ -1,0 +1,190 @@
+Script started on 2020-04-11 23:42:55-0400
+]0;tnm6@gold14: ~/232/homework06[01;32mtnm6@gold14[00m:[01;34m~/232/homework06[00m$ ./bakeshop
+Bakery starting up. Why don't we do curbside delivery?
+BAKER: No time like the present to bake that bread.
+CUSTOMER 2: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 3: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 5: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 4: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 7: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 2: I got that fresh, delicious loaf.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 2: I gave some bread to get bread.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 3: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 2: I got my receipt.
+CUSTOMER 2: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 3: I gave some bread to get bread.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 8: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 5: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 3: I got my receipt.
+CUSTOMER 3: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 5: I gave some bread to get bread.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 9: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 4: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 5: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 5: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 10: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 4: I gave some bread to get bread.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 7: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 4: I got my receipt.
+CUSTOMER 4: I've fulfilled my bread journey. Back to isolation.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 7: I gave some bread to get bread.
+CUSTOMER 1: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 8: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 7: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 8: I gave some bread to get bread.
+CUSTOMER 7: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 6: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 9: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 8: I got my receipt.
+CUSTOMER 8: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 9: I gave some bread to get bread.
+BAKER: No time like the present to bake that bread.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 10: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 9: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 10: I gave some bread to get bread.
+CUSTOMER 9: I've fulfilled my bread journey. Back to isolation.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 1: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 10: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 10: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 1: I gave some bread to get bread.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 6: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Bread has been thoroughly baked.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 1: I got my receipt.
+CUSTOMER 1: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 6: I gave some bread to get bread.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 6: I got my receipt.
+CUSTOMER 6: I've fulfilled my bread journey. Back to isolation.
+]0;tnm6@gold14: ~/232/homework06[01;32mtnm6@gold14[00m:[01;34m~/232/homework06[00m$ ./bakeshop
+Bakery starting up. Why don't we do curbside delivery?
+BAKER: No time like the present to bake that bread.
+CUSTOMER 1: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 2: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 3: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 4: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 7: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 1: I got that fresh, delicious loaf.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 1: I gave some bread to get bread.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 2: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 1: I got my receipt.
+CUSTOMER 1: I've fulfilled my bread journey. Back to isolation.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 2: I gave some bread to get bread.
+CUSTOMER 8: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 3: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 2: I got my receipt.
+CUSTOMER 2: I've fulfilled my bread journey. Back to isolation.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 3: I gave some bread to get bread.
+CUSTOMER 5: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 4: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 3: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 3: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 4: I gave some bread to get bread.
+CUSTOMER 6: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 7: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 4: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 4: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 9: I begin my bread journey. Mask on. Entering store.
+CUSTOMER 7: I gave some bread to get bread.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 8: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 7: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 7: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 8: I gave some bread to get bread.
+CUSTOMER 10: I begin my bread journey. Mask on. Entering store.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 5: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 8: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 8: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 5: I gave some bread to get bread.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 6: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 5: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 6: I gave some bread to get bread.
+CUSTOMER 5: I've fulfilled my bread journey. Back to isolation.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 9: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 6: I got my receipt.
+BAKER: No time like the present to bake that bread.
+CUSTOMER 9: I gave some bread to get bread.
+CUSTOMER 6: I've fulfilled my bread journey. Back to isolation.
+BAKER: Some more scrumptious bread has been baked.
+CUSTOMER 10: I got that fresh, delicious loaf.
+BAKER: Processing payment. Washing hands.
+BAKER: Bread has been thoroughly baked.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 9: I got my receipt.
+CUSTOMER 9: I've fulfilled my bread journey. Back to isolation.
+CUSTOMER 10: I gave some bread to get bread.
+BAKER: Processing payment. Washing hands.
+BAKER: Receipt given, hopefully uncontaminated.
+CUSTOMER 10: I got my receipt.
+CUSTOMER 10: I've fulfilled my bread journey. Back to isolation.
+]0;tnm6@gold14: ~/232/homework06[01;32mtnm6@gold14[00m:[01;34m~/232/homework06[00m$ exit
+
+Script done on 2020-04-11 23:43:48-0400
