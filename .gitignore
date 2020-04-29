@@ -12,3 +12,6 @@ __pycache__/
 
 # Unignore homework03
 !mystery
+
+# Ignore workspace settings
+.vscode/
