@@ -1,3 +1,12 @@
+'''
+main() for CalOS updated with _handle_data_label(), _load_program() modifications
+
+Homework07 assignment for CS-232, Calvin University
+Based on code by Professor Victor Norman
+Completed by Nathan Meyer (tnm6)
+April 29th, 2020
+'''
+
 import calos
 from cpu import CPU, MAX_CHARS_PER_ADDR
 from ram import RAM
@@ -183,6 +192,7 @@ class Monitor:
                 if self._debug:
                     print("Created PCB for process {}".format(procname))
                 addr = startaddr
+                pcb.set_low_mem(addr)
                 for line in f:
                     line = line.strip()
                     if line == '':
@@ -195,6 +205,8 @@ class Monitor:
                         addr += 1
                     elif line.startswith("__main:"):
                         self._handle_main_label(addr, line, pcb)
+                    elif line.startswith("__data:"):
+                        self._handle_data_label(addr, line, pcb)
                     else:   # the line is regular code: store it in ram
                         self._ram[addr] = line
                         addr += 1
@@ -220,6 +232,17 @@ class Monitor:
         pcb.set_entry_point(logical_addr)
         if self._debug:
             print("__main found at physical location", addr, "but logical addr", logical_addr)
+
+    def _handle_data_label(self, addr, line, pcb):
+        '''Read line from the file with format __data: <size>'''
+        if len(line.split()) != 2:
+            raise ValueError("Illegal format: __data: must be followed by size of data.")
+        size = int(line.split()[1])
+        high_mem = addr + size
+        pcb.set_high_mem(high_mem)
+        if self._debug:
+            print("__data is of size", size, "bytes")
+
 
     def _write_program(self, startaddr, endaddr, tapename):
         '''Write memory from startaddr to endaddr to tape (a file).'''

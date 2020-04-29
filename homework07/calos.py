@@ -1,3 +1,12 @@
+'''
+PCB updated __str__ to display high and low memory limits
+
+Homework07 assignment for CS-232, Calvin University
+Based on code by Professor Victor Norman
+Completed by Nathan Meyer (tnm6)
+April 29th, 2020
+'''
+
 import threading
 
 DEFAULT_QUANTUM = 3   # very short -- for pedagogical reasons.
@@ -253,7 +262,7 @@ class PCB:
         return self._name
 
     def __str__(self):
-        return "PCB({}): {}, state {}, entrypoint {}".\
-               format(self._pid, self._name, self._state,
-                      self._entry_point)
+        return "PCB({}): {}, state {}, entrypoint {}, low_mem {}, high_mem {}".\
+               format(self._pid, self._name, self._state, self._entry_point,
+                      self._mem_low, self._mem_high)
     

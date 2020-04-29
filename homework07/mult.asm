@@ -20,3 +20,5 @@ add reg0 reg2
 jmp 26
 mov reg2 34
 end
+
+__data: 3
