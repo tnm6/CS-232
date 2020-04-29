@@ -1,5 +1,5 @@
 '''
-CPU class with added MMU
+CPU class with added MMU implementation
 
 Homework07 assignment for CS-232, Calvin University
 Based on code by Professor Victor Norman
