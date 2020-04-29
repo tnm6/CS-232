@@ -90,6 +90,12 @@ class CPU:
         self._debug = debug
         self._timer.set_debug(debug)
 
+    def set_mmu_registers(self, low_mem, high_mem):
+        '''Takes low and high memory limits and applies them to MMU registers'''
+        self._mmu.set_reloc_register(low_mem)
+        # Convert high_mem to logical address for limit_reg
+        self._mmu.set_limit_register(high_mem - low_mem)
+
     def take_interrupt_mutex(self):
         self._intr_lock.acquire()
 

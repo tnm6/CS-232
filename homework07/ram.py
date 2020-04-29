@@ -30,10 +30,26 @@ class RAM:
 class MMU:
     def __init__(self, ram):
         self._ram = ram
+        self._reloc_reg = 0
+        self._limit_reg = 0
 
     def __getitem__(self, addr):
-        return self._ram[addr]
-
+        if self._is_legal_addr(addr):
+            return self._ram[addr + self._reloc_reg]
+    
     def __setitem__(self, addr, val):
-        self._ram[addr] = val
+        if self._is_legal_addr(addr):
+            self._ram[addr + self._reloc_reg] = val
+
+    def set_reloc_register(self, val):
+        self._reloc_reg = val
+
+    def set_limit_register(self, val):
+        self._limit_reg = val
+
+    def _is_legal_addr(self, addr):
+        if addr < self._limit_reg:
+            return True
+        print("BAD ADDRESS {}: too high".format(addr))
+        return False
 

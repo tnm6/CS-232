@@ -1,5 +1,6 @@
 '''
 PCB updated __str__ to display high and low memory limits
+Updated to set MMU registers alongside CPU registers
 
 Homework07 assignment for CS-232, Calvin University
 Based on code by Professor Victor Norman
@@ -72,6 +73,8 @@ class CalOS:
             # Required of all ISRs: restore the registers before returning
             # (if no context switch)
             cpu.set_registers(self._current_proc[cpu.get_num()].get_registers())
+            cpu.set_mmu_registers(self._current_proc[cpu.get_num()].get_low_mem(),
+                                  self._current_proc[cpu.get_num()].get_high_mem())
             return
 
         self.context_switch(cpu)
@@ -112,6 +115,7 @@ class CalOS:
 
         old_proc.set_registers(cpu.get_registers())
         cpu.set_registers(new_proc.get_registers())
+        cpu.set_mmu_registers(new_proc.get_low_mem(), new_proc.get_high_mem())
 
         self.add_to_ready_q(old_proc)
         new_proc.set_state(PCB.RUNNING)
@@ -176,6 +180,7 @@ class CalOS:
         self._current_proc[cpu.get_num()] = new_proc
         self.reset_timer(cpu)
         cpu.set_registers(new_proc.get_registers())
+        cpu.set_mmu_registers(new_proc.get_low_mem(), new_proc.get_high_mem())
         new_proc.set_state(PCB.RUNNING)
 
 class PCB:
