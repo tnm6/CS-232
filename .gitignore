@@ -18,3 +18,6 @@ __pycache__/
 
 # Test zip for homework08
 homework08/17FA CS-332-A-Firewall Lab-678308.zip
+
+# Unignore shell script for homework08
+!moodlefix
