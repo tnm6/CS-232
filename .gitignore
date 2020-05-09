@@ -15,3 +15,6 @@ __pycache__/
 
 # Ignore workspace settings
 .vscode/
+
+# Test zip for homework08
+homework08/17FA CS-332-A-Firewall Lab-678308.zip
