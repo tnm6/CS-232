@@ -1,3 +1,9 @@
+# Shell script to unzip homework files for grading and reformat to shell-
+# friendly names.
+# 
+# CS-232, Professor Victor Norman, Calvin University
+# Student: Nathan Meyer (tnm6)
+
 #!/bin/bash
 LANG=C
 
@@ -11,8 +17,7 @@ removetail() {
 }
 
 log() {
-  if [ $1 -eq 1 ]
-  then
+  if [ "$1" = true ]; then
     echo $2
   fi
 }
@@ -22,57 +27,82 @@ error() {
   exit 1
 }
 
-verbose=0
-if [ $# -eq 1 ]
-then
+# Check for arguments and see if verbose flag is set (must be first arg)
+verbose=false
+if [ $# -eq 1 ]; then
   inputfile=$1
-elif [ $# -eq 2 ]
-then
+elif [ $# -eq 2 ]; then
   case $1 in
-    "-v"|"--verbose")
-      verbose=1
-      ;;
-    *)
-      error "Invalid arguments"
+  "-v" | "--verbose")
+    verbose=true
+    ;;
+  *)
+    error "Invalid arguments. Usage: ./moodlefix (-v/--verbose) <filename>"
+    ;;
   esac
   inputfile=$2
 else
-  error "Invalid number of arguments"
+  error "Invalid number of arguments. Usage: ./moodlefix [-v/--verbose] <filename>"
 fi
 
-newdir=$(removespaces "$inputfile")
-newdir=$(removetail $newdir "^.*" "-[0-9]*\.zip")
+# Check if file exists
+if [ -f "$inputfile" ]; then
+  # Format new directory name for unzipping
+  newdir=$(removespaces "$inputfile")
+  newdir=$(removetail $newdir "^.*" "-[0-9]*\.zip")
+else
+  error "File '$inputfile' not found. Exiting."
+fi
 
-log $verbose "Unzipping '$inputfile' to '$newdir'"
-unzip -q "$inputfile" -d $newdir
+# Make sure directory does not already exist
+if [ ! -d $newdir ]; then
+  log $verbose "Unzipping '$inputfile' to '$newdir'..."
+  unzip -q "$inputfile" -d $newdir || error "Unzipping '$inputfile' failed. Exiting."
+else
+  error "Directory '$newdir' already exists. Exiting."
+fi
 
 cd $newdir
-for dir in */
-do
+
+# Iterate through each directory
+for dir in */; do
+  # Format new directory name with no spaces, keep name only
   newdir=$(removespaces "$dir")
   newdir=$(removetail "$newdir" "[a-zA-Z]*" "_.*")
-  
-  if [ ! -d $newdir ]
-  then
+
+  # Make the new directory if it does not yet exist
+  if [ ! -d $newdir ]; then
+    log $verbose "Making directory '$newdir'..."
     mkdir $newdir
   fi
 
   cd "$dir"
-  for file in *
-  do
-    newfile=$(removespaces "$file")
-    
-    # https://stackoverflow.com/a/407229
-    if [ ${file: -4} == ".zip" ]
-    then
-      newfile=$(removetail $newfile ".*" "\.zip")
-      unzip -q $file -d "../$newdir/$newfile"
-      rm "$file"
+
+  # Iterate through each file in the student directories
+  for file in *; do
+    # Remove spaces for file's new name
+    newfilename=$(removespaces "$file")
+
+    # This if-statement from: https://stackoverflow.com/a/407229
+    # Checks if file is a zip, unzips if so
+    if [ ${file: -4} == ".zip" ]; then
+      # Remove .zip
+      newfilename=$(removetail $newfilename ".*" "\.zip")
+      
+      log $verbose "Unzipping '$file' to '../$newdir/$newfilename'..."
+      unzip -q $file -d "../$newdir/$newfilename" || error "Unzipping '$file' failed. Exiting."
+
+      # Delete original zipped file
+      rm "$file" || error "Removing '$file' failed. Exiting."
     else
-      mv "$file" "../$newdir/$newfile"
+      log $verbose "Moving '$file' to '../$newdir/$newfilename'..."
+      mv "$file" "../$newdir/$newfilename" || error "Moving '$file' failed. Exiting."
     fi
   done
+
   cd ..
 
-  rmdir "$dir"
+  log $verbose "Deleting directory '$dir'..."
+  # Includes redundant check for removing non-empty directory (shouldn't happen)
+  rmdir "$dir" || error "Removing directory '$dir' failed. Exiting."
 done
