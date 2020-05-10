@@ -1,10 +1,79 @@
- #!/bin/bash
+#!/bin/bash
 LANG=C
 
 removespaces() {
-    echo "$1" | sed -e "s/ //g"
+  echo "$1" | sed -e "s/ //g"
 }
 
-inputfile="$@"
+removetail() {
+  # Removes tail of a string based on given regexes of head and tail
+  echo "$1" | sed -E "s/^($2)$3$/\1/"
+}
 
-nospaces=$(removespaces "$inputfile")
+verbose() {
+  if [[ $1 -eq 1 ]]
+  then
+    echo $2
+  fi
+}
+
+verbose=0
+if [ $# -eq 1 ]
+then
+  inputfile=$1
+elif [ $# -eq 2 ]
+then
+  case $1 in
+    "-v"|"--verbose")
+      verbose=1
+      ;;
+    *)
+      echo "Invalid arguments"
+      exit 1
+  esac
+  inputfile=$2
+else
+  echo "Invalid arguments"
+  exit 1
+fi
+
+echo $verbose
+
+exit 1
+
+newdir=$(removespaces "$inputfile")
+newdir=$(removetail $newdir "^.*" "-[0-9]*\.zip")
+
+verbose $verbose "Unzipping '$inputfile' to $newdir"
+unzip -q "$inputfile" -d $newdir
+
+cd $newdir
+for dir in */
+do
+  newdir=$(removespaces "$dir")
+  newdir=$(removetail "$newdir" "[a-zA-Z]*" "_.*")
+  
+  if [ ! -d $newdir ]
+  then
+    mkdir $newdir
+  fi
+
+  cd "$dir"
+  for file in *
+  do
+    newfile=$(removespaces "$file")
+    
+    # https://stackoverflow.com/a/407229
+    if [ ${file: -4} == ".zip" ]
+    then
+      newfile=$(removetail $newfile ".*" "\.zip")
+      unzip -q $file -d "../$newdir/$newfile"
+      rm "$file"
+    else
+      mv "$file" "../$newdir/$newfile"
+    fi
+  done
+  cd ..
+
+  rmdir "$dir"
+done
