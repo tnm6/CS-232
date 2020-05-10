@@ -16,8 +16,9 @@ __pycache__/
 # Ignore workspace settings
 .vscode/
 
-# Test zip for homework08
+# Test zip and dir for homework08
 homework08/17FA CS-332-A-Firewall Lab-678308.zip
+17FACS-332-A-FirewallLab
 
 # Unignore shell script for homework08
 !moodlefix
