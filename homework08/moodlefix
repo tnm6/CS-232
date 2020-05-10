@@ -10,11 +10,16 @@ removetail() {
   echo "$1" | sed -E "s/^($2)$3$/\1/"
 }
 
-verbose() {
-  if [[ $1 -eq 1 ]]
+log() {
+  if [ $1 -eq 1 ]
   then
     echo $2
   fi
+}
+
+error() {
+  echo $1
+  exit 1
 }
 
 verbose=0
@@ -28,23 +33,17 @@ then
       verbose=1
       ;;
     *)
-      echo "Invalid arguments"
-      exit 1
+      error "Invalid arguments"
   esac
   inputfile=$2
 else
-  echo "Invalid arguments"
-  exit 1
+  error "Invalid number of arguments"
 fi
-
-echo $verbose
-
-exit 1
 
 newdir=$(removespaces "$inputfile")
 newdir=$(removetail $newdir "^.*" "-[0-9]*\.zip")
 
-verbose $verbose "Unzipping '$inputfile' to $newdir"
+log $verbose "Unzipping '$inputfile' to '$newdir'"
 unzip -q "$inputfile" -d $newdir
 
 cd $newdir
